@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 启用shiro授权注解拦截 -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+
+        <!-- 配置securityManager -->
+        <property name="securityManager" ref="securityManager"/>
+
+        <!-- 如果没有认证成功, 需要跳转到的地址 -->
+        <property name="loginUrl" value="/login"/>
+
+        <!-- 自定义过滤器 -->
+        <property name="filters">
+            <map>
+                <entry key="authc" value-ref="formAuthenticationFilter"/>
+            </map>
+        </property>
+
+        <property name="filterChainDefinitions">
+            <value>
+                <!-- anon: 代表资源可以匿名访问 -->
+                /resources/lib/** = anon
+                /resources/static/** = anon
+                /resources/temp/** = anon
+                /getVerifyCode = anon
+                <!--/loginSubmit = anon-->
+                <!-- authc: 需要认证才可以访问 -->
+
+                /loginSubmit = authc
+
+                <!-- 退出 -->
+                /logout = logout
+
+                <!-- 必须要有管理员身份才可以进行访问 -->
+                <!-- roles[XX] 代表 有XX角色才可以访问 -->
+                /role/list = roles[admin],authc
+
+                <!-- user: 表示通过了认证/通过remember me 认证通过可以访问 -->
+                /** = user
+
+            </value>
+        </property>
+    </bean>
+
+    <!-- 配置进行授权和认证的realm, 需要自定义 -->
+    <bean id="myRealm" class="com.baidu.base.shiro.MyRealm"/>
+
+    <!-- 配置SecurityManager 需要一个Realm -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="myRealm"/>
+    </bean>
+
+
+    <!-- 表单认证过滤器可以配置, 可以不配置
+        如果不配置的话, 先不要自己实现Subject.login代码 -->
+    <bean id="formAuthenticationFilter" class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter">
+        <!-- 表单中账号的input 的name-->
+        <property name="usernameParam" value="username"/>
+
+        <property name="passwordParam" value="password"/>
+
+        <!-- 配置用户认证地址 -->
+        <property name="loginUrl" value="/loginSubmit"/>
+     </bean>
+</beans>
