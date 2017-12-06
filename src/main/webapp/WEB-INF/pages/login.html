@@ -43,24 +43,21 @@
             </div>
             <div class="row cl">
                 <div class="formControls col-xs-8 col-xs-offset-3">
-                    <input  class="input-text size-L" type="text" placeholder="验证码"
+                    <input id="verifyCode" class="input-text size-L" type="text" placeholder="验证码"
                            onblur="checkCode()"
                            onclick="if(this.value=='验证码:'){this.value='';}" value="" style="width:150px;">
-                    <img id="verifyCode" src="/getVerifyCode"> <a id="kanbuq" onclick="getVerifyCode()"
-                                                                  href="javascript:;">看不清，换一张</a></div>
+                    <img id="image" src="/getVerifyCode"> <a id="kanbuq" onclick="getVerifyCode()"
+                                                             href="javascript:;">看不清，换一张</a></div>
             </div>
             <div class="row cl">
                 <div class="formControls col-xs-8 col-xs-offset-3">
+                    <label style="float: right" for="online">
+                        <input type="checkbox" name="online" id="online" value="">
+                        记住密码</label>
                     <span id="codeErr"></span>
                 </div>
             </div>
-            <div class="row cl">
-                <div class="formControls col-xs-8 col-xs-offset-3">
-                    <label for="online">
-                        <input type="checkbox" name="online" id="online" value="">
-                        记住密码</label>
-                </div>
-            </div>
+
             <div class="row cl">
                 <div class="formControls col-xs-8 col-xs-offset-3">
                     <input name="" type="button" onclick="loginSubmit()" class="btn btn-success radius size-L"
@@ -78,10 +75,11 @@
 <!--此乃百度统计代码，请自行删除-->
 <script>
     function getVerifyCode() {
-        $("#verifyCode").attr("src", "/getVerifyCode?index=" + Math.random());
+        $("#image").attr("src", "/getVerifyCode?index=" + Math.random());
     }
 
     function loginSubmit() {
+
         $.ajax({
             type: "post",
             url: "/loginSubmit",
@@ -89,21 +87,25 @@
                 username: $("#username").val(),
                 password: $("#password").val(),
             },
-            success: function () {
-                location.href = "/index";
+            success: function (result) {
+                if (result.errorCode == 1) {
+                    $("#codeErr").html(result.message);
+                }else {
+                    location.href = "/index";
+                }
             }
         })
-    };
+    }
 
     function checkCode() {
         $.ajax({
-            type:"post",
-            url:"/checkCode",
-            data:{
+            type: "get",
+            url: "/checkCode",
+            data: {
                 verifyCode: $("#verifyCode").val()
             },
             success: function (result) {
-                $("#codeErr").html(result);
+                $("#codeErr").html(result.message);
             }
         })
     }

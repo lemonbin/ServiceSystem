@@ -3,6 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <description>Shiro安全配置</description>
+
     <!-- 启用shiro授权注解拦截 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 
@@ -11,6 +13,9 @@
 
         <!-- 如果没有认证成功, 需要跳转到的地址 -->
         <property name="loginUrl" value="/login"/>
+
+        <!-- 没有权限跳转的页面 -->
+        <!--<property name="unauthorizedUrl" value="/unauthorized"/>-->
 
         <!-- 自定义过滤器 -->
         <property name="filters">
@@ -26,7 +31,7 @@
                 /resources/static/** = anon
                 /resources/temp/** = anon
                 /getVerifyCode = anon
-                /checkCode == anon
+                /checkCode = anon
                 <!--/loginSubmit = anon-->
                 <!-- authc: 需要认证才可以访问 -->
 
