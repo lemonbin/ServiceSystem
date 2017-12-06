@@ -23,7 +23,7 @@
         <!-- 引入mybatis的配置文件 -->
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
 
-        <property name="mapperLocations" value="classpath:com/baidu/base/mapper/AdminMapper.xml"/>
+        <property name="mapperLocations" value="classpath:com/baidu/base/mapper/MainMapper.xml"/>
     </bean>
 
     <!-- 3.配置事务 -->
@@ -49,7 +49,7 @@
     <!-- 配置mybatis中的mapper接口自动扫描 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!-- mapper代理对象所在的包 -->
-        <property name="basePackage" value="com.baidu.dao"/>
+        <property name="basePackage" value="com.baidu.base.mapper"/>
         <!-- 定义sessionFactory, 引用上面配置的工厂对象 -->
         <property name="sqlSessionFactoryBeanName" value="sessionFactory"/>
     </bean>
