@@ -17,8 +17,7 @@ import java.io.IOException;
 @Controller
 public class MainController {
 
-    //111111111
-    //66666666666666666
+
     @RequestMapping("/welcome")
     public String welcome() {
         return "welcome";
@@ -42,14 +41,12 @@ public class MainController {
     //登录表单验证
     @RequestMapping("/loginSubmit")
     public String loginSubmit(HttpServletRequest request) throws Exception {
-        // 2222222222
-        // 444444444
+
         //如果在shiro spring文件中, 配置了表单认证过滤器
         //那么在这个方法中只需要处理异常信息即可
 
 //        SecurityUtils.getSubject()
 
-//       1113333333
         String exClassName = (String) request.getAttribute("shiroLoginFailure");
 
         if (UnknownAccountException.class.getName().equals(exClassName)) {
@@ -58,6 +55,16 @@ public class MainController {
             throw new IncorrectCredentialsException("密码错误");
         } else {
             throw new Exception(exClassName);
+        }
+    }
+
+    @RequestMapping("/checkCode")
+    public String checkCode(String verifyCode, HttpServletRequest request){
+        String code = (String) request.getSession().getAttribute("code");
+        if (code.equalsIgnoreCase(verifyCode)){
+            return "验证码错误";
+        }else {
+            return "验证码正确";
         }
     }
 
@@ -80,7 +87,6 @@ public class MainController {
 
     /**
      * 获取验证码图片以及值
-     * 66666666666666666666
      *
      */
     @RequestMapping("/getVerifyCode")

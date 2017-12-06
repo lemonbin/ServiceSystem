@@ -43,11 +43,16 @@
             </div>
             <div class="row cl">
                 <div class="formControls col-xs-8 col-xs-offset-3">
-                    <input class="input-text size-L" type="text" placeholder="验证码"
-                           onblur="if(this.value==''){this.value='验证码:'}"
+                    <input  class="input-text size-L" type="text" placeholder="验证码"
+                           onblur="checkCode()"
                            onclick="if(this.value=='验证码:'){this.value='';}" value="" style="width:150px;">
                     <img id="verifyCode" src="/getVerifyCode"> <a id="kanbuq" onclick="getVerifyCode()"
                                                                   href="javascript:;">看不清，换一张</a></div>
+            </div>
+            <div class="row cl">
+                <div class="formControls col-xs-8 col-xs-offset-3">
+                    <span id="codeErr"></span>
+                </div>
             </div>
             <div class="row cl">
                 <div class="formControls col-xs-8 col-xs-offset-3">
@@ -77,20 +82,33 @@
     }
 
     function loginSubmit() {
-        alert(1);
         $.ajax({
             type: "post",
             url: "/loginSubmit",
             data: {
                 username: $("#username").val(),
                 password: $("#password").val(),
-                verifyCode: $("#verifyCode").val()
             },
             success: function () {
                 location.href = "/index";
             }
         })
+    };
+
+    function checkCode() {
+        $.ajax({
+            type:"post",
+            url:"/checkCode",
+            data:{
+                verifyCode: $("#verifyCode").val()
+            },
+            success: function (result) {
+                $("#codeErr").html(result);
+            }
+        })
     }
+
+
 </script>
 </body>
 </html>

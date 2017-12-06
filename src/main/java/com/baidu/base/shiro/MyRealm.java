@@ -60,9 +60,6 @@ public class MyRealm extends AuthorizingRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        ServletRequest request = ((WebSubject) SecurityUtils.getSubject()).getServletRequest();
-        HttpSession session = ((HttpServletRequest)request).getSession();
-        String code = (String) session.getAttribute("code");
 
         //获得用户此次输入的用户名
         String username = (String) token.getPrincipal();
