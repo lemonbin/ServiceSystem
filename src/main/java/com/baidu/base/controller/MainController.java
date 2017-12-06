@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Created by dllo on 2017/12/4.
@@ -48,7 +49,7 @@ public class MainController {
     //登录表单验证
     @ResponseBody
     @RequestMapping("/loginSubmit")
-    public AjaxResult loginSubmit(HttpServletRequest request) {
+    public AjaxResult loginSubmit(HttpServletRequest request) throws IOException {
         AjaxResult ajaxResult = new AjaxResult();
         //如果在shiro spring文件中, 配置了表单认证过滤器
         //那么在这个方法中只需要处理异常信息即可
@@ -58,26 +59,23 @@ public class MainController {
         String exClassName = (String) request.getAttribute("shiroLoginFailure");
 
         if (UnknownAccountException.class.getName().equals(exClassName)) {
-            ajaxResult.setStatus(false);
+            ajaxResult.setErrorCode(1);
             ajaxResult.setMessage("用户名不存在");
         } else if (IncorrectCredentialsException.class.getName().equals(exClassName)) {
-            ajaxResult.setStatus(false);
+            ajaxResult.setErrorCode(1);
             ajaxResult.setMessage("密码错误");
-        } else {
-            ajaxResult.setStatus(false);
-            ajaxResult.setMessage("未知错误");
         }
         return ajaxResult;
     }
 
     @ResponseBody
     @RequestMapping("/checkCode")
-    public AjaxResult checkCode(String verifyCode, HttpServletRequest request){
+    public AjaxResult checkCode(String verifyCode, HttpServletRequest request) {
         AjaxResult ajaxResult = new AjaxResult();
         String code = (String) request.getSession().getAttribute("code");
-        if (code.equalsIgnoreCase(verifyCode)){
+        if (code.equalsIgnoreCase(verifyCode)) {
             ajaxResult.setMessage("验证码正确");
-        }else {
+        } else {
             ajaxResult.setMessage("验证码错误");
         }
         return ajaxResult;
@@ -100,7 +98,6 @@ public class MainController {
 
     /**
      * 获取验证码图片以及值
-     *
      */
     @RequestMapping("/getVerifyCode")
     public void getVerifyCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -109,6 +106,4 @@ public class MainController {
         request.getSession().setAttribute("code", code.getText());
         VerifyCode.output(image, response.getOutputStream());
     }
-
-
 }
