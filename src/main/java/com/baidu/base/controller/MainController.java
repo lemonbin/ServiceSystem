@@ -1,5 +1,6 @@
 package com.baidu.base.controller;
 
+import com.baidu.base.service.MainService;
 import com.baidu.base.utils.AjaxResult;
 import com.baidu.base.utils.VerifyCode;
 import org.apache.shiro.SecurityUtils;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
@@ -20,6 +22,8 @@ import java.io.IOException;
 @Controller
 public class MainController {
 
+    @Resource
+    private MainService mainService;
 
     @RequestMapping("/welcome")
     public String welcome() {
@@ -54,10 +58,13 @@ public class MainController {
         String exClassName = (String) request.getAttribute("shiroLoginFailure");
 
         if (UnknownAccountException.class.getName().equals(exClassName)) {
+            ajaxResult.setStatus(false);
             ajaxResult.setMessage("用户名不存在");
         } else if (IncorrectCredentialsException.class.getName().equals(exClassName)) {
+            ajaxResult.setStatus(false);
             ajaxResult.setMessage("密码错误");
         } else {
+            ajaxResult.setStatus(false);
             ajaxResult.setMessage("未知错误");
         }
         return ajaxResult;

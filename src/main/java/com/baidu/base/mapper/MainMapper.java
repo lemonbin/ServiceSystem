@@ -7,7 +7,7 @@ import com.baidu.user.domain.User;
  */
 public interface MainMapper {
 
-    User findByUserName(String username);
+    User findByUsername(String username);
 
     User findSingle(User user1);
 }
