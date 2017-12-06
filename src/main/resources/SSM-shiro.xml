@@ -26,7 +26,7 @@
                 /resources/static/** = anon
                 /resources/temp/** = anon
                 /getVerifyCode = anon
-                /checkCode == anon
+                /checkCode = anon
                 <!--/loginSubmit = anon-->
                 <!-- authc: 需要认证才可以访问 -->
 
