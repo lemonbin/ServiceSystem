@@ -36,7 +36,7 @@
     <table class="table table-border table-bordered table-hover table-bg">
         <thead>
         <tr>
-            <th scope="col" colspan="6">角色管理</th>
+            <th scope="col">角色管理</th>
         </tr>
         <tr class="text-c">
             <th><input type="checkbox" value="" name=""></th>
@@ -53,38 +53,7 @@
         </tr>
         </thead>
         <tbody id="tab">
-        <!--<tr class="text-c">-->
-        <!--<td><input type="checkbox" value="" name=""></td>-->
-        <!--<td>1</td>-->
-        <!--<td>超级管理员</td>-->
-        <!--<td><a href="#">admin</a></td>-->
-        <!--<td>拥有至高无上的权利</td>-->
-        <!--<td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','admin-role-add.html','1')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>-->
-        <!--</tr>-->
-        <!--<tr class="text-c">-->
-        <!--<td><input type="checkbox" value="" name=""></td>-->
-        <!--<td>2</td>-->
-        <!--<td>总编</td>-->
-        <!--<td><a href="#">张三</a></td>-->
-        <!--<td>具有添加、审核、发布、删除内容的权限</td>-->
-        <!--<td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','admin-role-add.html','2')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>-->
-        <!--</tr>-->
-        <!--<tr class="text-c">-->
-        <!--<td><input type="checkbox" value="" name=""></td>-->
-        <!--<td>3</td>-->
-        <!--<td>栏目主辑</td>-->
-        <!--<td><a href="#">李四</a>，<a href="#">王五</a></td>-->
-        <!--<td>只对所在栏目具有添加、审核、发布、删除内容的权限</td>-->
-        <!--<td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','admin-role-add.html','3')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>-->
-        <!--</tr>-->
-        <!--<tr class="text-c">-->
-        <!--<td><input type="checkbox" value="" name=""></td>-->
-        <!--<td>4</td>-->
-        <!--<td>栏目编辑</td>-->
-        <!--<td><a href="#">赵六</a>，<a href="#">钱七</a></td>-->
-        <!--<td>只对所在栏目具有添加、删除草稿等权利。</td>-->
-        <!--<td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','admin-role-add.html','4')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>-->
-        <!--</tr>-->
+
         </tbody>
     </table>
 </div>
@@ -123,74 +92,43 @@
         });
     }
 
+    pageAll();
 
     //        new 这就是页面的输入的内容
-    function addNewTR(cost_id, name, base_duration, base_cost, unit_cost, creatime, startime, status) {
-        var td1 = $("<td></td>").html("<p>" + cost_id + "</p>");
-        var td2 = $("<td></td>")
-        var td3 = $("<td></td>")
-        if (base_duration == null) {
-            $("<p></p>").appendTo(td3)
-        } else {
-            $("<p>" + base_duration + "小时</p>").appendTo(td3)
-        }
-        var td4 = $("<td></td>")
-
-        if (base_cost == null) {
-            $("<p></p>").appendTo(td4)
-        } else {
-            $("<p>" + base_cost + "元</p>").appendTo(td4)
-        }
-        var td5 = $("<td></td>")
-
-        if (unit_cost == null) {
-            $("<p></p>").appendTo(td5)
-        } else {
-            $("<p>" + unit_cost + "元/小时</p>").appendTo(td5)
-        }
-
-        //这里把time类型转为date类型
-        var td6 = $("<td></td>").html("<p>" + creatime == 0 | creatime == null ? "" : new Date(parseInt(creatime)).toLocaleString() + "</p>")
-        var td7 = $("<td></td>").html("<p>" + startime == 0 | startime == null ? "" : new Date(parseInt(startime)).toLocaleString() + "</p>")
-        var td8 = $("<td></td>").html("<p>" + status + "</p>")
-        var td9 = $("<td></td>")
-        if (status == "开通") {
-            $("<p>启用成功</p>").appendTo(td9)
-        } else {
-            $("<input type='button' value='启用' class='btn_start'/>").appendTo(td9).click(startFee).attr("QyId", cost_id);
-            $("<input type='button' value='修改' class='btn_modify'/>").appendTo(td9).click(updateUp).attr("updateId", cost_id)
-            $("<input type='button' value='删除' class='btn_delete'/>").appendTo(td9).click(deleteFee).attr("deleteId", cost_id)
-        }
-        $("<a href='#'></a>").html("<p>" + name + "</p>").appendTo(td2).click(findByname).attr("findBynameId", cost_id)
-        var append = $("<tr></tr>").append(td1).append(td2).append(td3).append(td4).append(td5).append(td6).append(td7).append(td8).append(td9);
+    function addNewTR(name,urlkey,parent_name,type,url,create_time,username,sort,status) {
+        var td1 = $("<td></td>").html("<input type='checkbox' value='' name=''>");
+        var td2 = $("<td></td>").html(name);
+        var td3 = $("<td></td>").html(urlkey);
+        var td4 = $("<td></td>").html(parent_name);
+        var td5 = $("<td></td>").html(type);
+        var td6 = $("<td></td>").html(url);
+        var td7 = $("<td></td>").html(create_time);
+        var td8 = $("<td></td>").html(username);
+        var td9 = $("<td></td>").html(sort);
+        var td10 = $("<td class='f-14'></td>").html(status);
+        var td11 = $("<td></td>");
+        $("<a title='编辑' href='javascript:;' style='text-decoration:none'><i class='Hui-iconfont'>&#xe6df;</i> </a>").appendTo(td11);
+        $("<a title='删除' href='javascript:;' class='ml-5' style='text-decoration:none'><i class='Hui-iconfont'>&#xe6e2;</i> </a>").appendTo(td11);
+        var append = $("<tr class='text-c'></tr>").append(td1).append(td2).append(td3).append(td4).append(td5).append(td6).append(td7).append(td8).append(td9).append(td10).append(td11);
         $("#tab").append(append)
     }
 
-    pageAll(0, 1, 3);
+
 
     //分页
-    function pageAll(info, pageNum, pageSize) {
+    function pageAll() {
+
         alert(1);
         $.ajax({
             type: "post",
             url: "/pageAll",
-            data: {
-                info: info,
-                pageNum: pageNum,
-                pageSize: pageSize
-            },
-            success: function (result) {
-//                    console.log(result);
-			var list = result.list;
-			//这块注意一下
-			$("#tab").html("");
-			$("#page").html("");
-			//调用分页方法
-			//传入两个参数 一个结果集 一个地址
-			showPage(result, "/pageAll")
+            data: null,
+            success: function (list) {
+                alert(list);
 			for (var i = 0; i < list.length; i++) {
-				addNewTR(list[i].cost_id, list[i].name, list[i].base_duration, list[i].base_cost,
-						list[i].unit_cost, list[i].creatime, list[i].startime, list[i].status);
+                alert(list[i].parent_name)
+				addNewTR(list[i].name, list[i].urlkey, list[i].parent_name, list[i].type,
+						list[i].url, list[i].create_time, list[i].username, list[i].sort,list[i].status);
 			}
 
             }

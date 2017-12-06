@@ -1,6 +1,7 @@
 package com.baidu.menu.mapper;
 
 import com.baidu.menu.domain.Menu;
+import com.baidu.menu.domain.ext.ExtMenu;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  */
 public interface MenuMapper {
 
-    List<Menu> selectAll();
+    List<ExtMenu> selectAll();
 
+    Menu findById(int parent_id);
 }

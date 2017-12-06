@@ -1,6 +1,7 @@
 package com.baidu.menu.service.impl;
 
 import com.baidu.menu.domain.Menu;
+import com.baidu.menu.domain.ext.ExtMenu;
 import com.baidu.menu.mapper.MenuMapper;
 import com.baidu.menu.service.MenuService;
 import com.github.pagehelper.PageHelper;
@@ -14,34 +15,29 @@ import java.util.List;
  * Created by dllo on 2017/12/6.
  */
 @Service
-public class MenuServiceImpl implements MenuService{
+public class MenuServiceImpl implements MenuService {
     @Resource
     public MenuMapper menuMapper;
 
-    //分页 +排序
-    public PageInfo<Menu> queryPage(Integer info,Integer pageNum, Integer PagSize) {
-        pageNum = pageNum == null ? 1 : pageNum;
-        PagSize = PagSize == null ? 3 : PagSize;
+//    //分页
+//    public PageInfo<Menu> queryPage(Integer pageNum, Integer PagSize) {
+//        pageNum = pageNum == null ? 1 : pageNum;
+//        PagSize = PagSize == null ? 3 : PagSize;
+////
+//        PageHelper.startPage(pageNum, PagSize);
+//
+//        List<Menu> all = menuMapper.selectAll();
+//        PageInfo<Menu> pageInfo = new PageInfo<>(all);
+//        return pageInfo;
+//    }
 
-        if (info ==0){
-            PageHelper.startPage(pageNum, PagSize);
-        }
-        if (info ==1 ) {
-            PageHelper.startPage(pageNum, PagSize, "base_cost desc");
-        }
-        if (info ==2) {
-            PageHelper.startPage(pageNum, PagSize, "base_cost asc");
-        }
-        if (info==3) {
-            PageHelper.startPage(pageNum, PagSize, "base_duration desc");
-        }
-        if (info==4) {
-            PageHelper.startPage(pageNum, PagSize, "base_duration asc");
-        }
+    @Override
+    public List<ExtMenu> findAll() {
+        return menuMapper.selectAll();
+    }
 
-        List<Menu> all = menuMapper.selectAll();
-        PageInfo<Menu> pageInfo = new PageInfo<Menu>(all);
-
-        return pageInfo;
+    @Override
+    public Menu findById(int parent_id) {
+        return menuMapper.findById(parent_id);
     }
 }

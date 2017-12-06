@@ -13,6 +13,7 @@ public class Menu implements Serializable {
     private String icon;
     private String name;
     private String urlkey;
+    private String url;
     private int status;
     private int type;
     private int sort;
@@ -25,12 +26,13 @@ public class Menu implements Serializable {
     public Menu() {
     }
 
-    public Menu(int id, int parent_id, String icon, String name, String urlkey, int status, int type, int sort, int level, Timestamp create_time, int create_id, Timestamp update_time, int update_id) {
+    public Menu(int id, int parent_id, String icon, String name, String urlkey, String url, int status, int type, int sort, int level, Timestamp create_time, int create_id, Timestamp update_time, int update_id) {
         this.id = id;
         this.parent_id = parent_id;
         this.icon = icon;
         this.name = name;
         this.urlkey = urlkey;
+        this.url = url;
         this.status = status;
         this.type = type;
         this.sort = sort;
@@ -49,6 +51,7 @@ public class Menu implements Serializable {
                 ", icon='" + icon + '\'' +
                 ", name='" + name + '\'' +
                 ", urlkey='" + urlkey + '\'' +
+                ", url='" + url + '\'' +
                 ", status=" + status +
                 ", type=" + type +
                 ", sort=" + sort +
@@ -98,6 +101,14 @@ public class Menu implements Serializable {
 
     public void setUrlkey(String urlkey) {
         this.urlkey = urlkey;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public int getStatus() {
