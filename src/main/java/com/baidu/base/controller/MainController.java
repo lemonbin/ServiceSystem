@@ -21,7 +21,6 @@ import java.io.IOException;
  */
 @Controller
 public class MainController {
-
     @Resource
     private MainService mainService;
 
@@ -54,17 +53,15 @@ public class MainController {
         //那么在这个方法中只需要处理异常信息即可
 
 //        SecurityUtils.getSubject()
-
         String exClassName = (String) request.getAttribute("shiroLoginFailure");
-
         if (UnknownAccountException.class.getName().equals(exClassName)) {
-            ajaxResult.setStatus(false);
+            ajaxResult.setErrorCode(1);
             ajaxResult.setMessage("用户名不存在");
         } else if (IncorrectCredentialsException.class.getName().equals(exClassName)) {
-            ajaxResult.setStatus(false);
+            ajaxResult.setErrorCode(1);
             ajaxResult.setMessage("密码错误");
         } else {
-            ajaxResult.setStatus(false);
+            ajaxResult.setErrorCode(1);
             ajaxResult.setMessage("未知错误");
         }
         return ajaxResult;
