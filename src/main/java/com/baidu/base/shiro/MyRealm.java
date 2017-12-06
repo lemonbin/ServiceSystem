@@ -67,7 +67,6 @@ public class MyRealm extends AuthorizingRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-
         //获得用户此次输入的用户名
         String username = (String) token.getPrincipal();
         //此处应该拿username去数据库查询, 是否存在该用户

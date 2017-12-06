@@ -6,7 +6,7 @@ package com.baidu.base.utils;
 public class AjaxResult {
     private String message;
     private boolean status;
-
+    private int errorCode = 0;
     public String getMessage() {
         return message;
     }
@@ -21,5 +21,13 @@ public class AjaxResult {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public int getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(int errorCode) {
+        this.errorCode = errorCode;
     }
 }
