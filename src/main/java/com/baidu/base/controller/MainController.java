@@ -3,6 +3,8 @@ package com.baidu.base.controller;
 import com.baidu.base.service.MainService;
 import com.baidu.base.utils.AjaxResult;
 import com.baidu.base.utils.VerifyCode;
+import com.baidu.menu.domain.Menu;
+import com.github.pagehelper.PageInfo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -60,9 +63,6 @@ public class MainController {
         } else if (IncorrectCredentialsException.class.getName().equals(exClassName)) {
             ajaxResult.setErrorCode(1);
             ajaxResult.setMessage("密码错误");
-        } else {
-            ajaxResult.setErrorCode(1);
-            ajaxResult.setMessage("未知错误");
         }
         return ajaxResult;
     }
@@ -106,6 +106,8 @@ public class MainController {
         request.getSession().setAttribute("code", code.getText());
         VerifyCode.output(image, response.getOutputStream());
     }
+
+
 
 
 }

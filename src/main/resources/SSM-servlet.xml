@@ -7,7 +7,7 @@
 
     <mvc:annotation-driven/>
 
-    <context:component-scan base-package="com.baidu.base"/>
+    <context:component-scan base-package="com.baidu.base,com.baidu.menu"/>
 
     <mvc:default-servlet-handler/>
 

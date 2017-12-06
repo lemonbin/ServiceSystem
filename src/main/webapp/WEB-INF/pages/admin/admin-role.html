@@ -1,84 +1,92 @@
 ﻿<!DOCTYPE HTML>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="renderer" content="webkit|ie-comp|ie-stand">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-<!--[if lt IE 9]>
-<script type="text/javascript" src="/resources/lib/html5shiv.js"></script>
-<script type="text/javascript" src="/resources/lib/respond.min.js"></script>
-<![endif]-->
-<link rel="stylesheet" type="text/css" href="/resources/static/h-ui/css/H-ui.min.css" />
-<link rel="stylesheet" type="text/css" href="/resources/static/h-ui.admin/css/H-ui.admin.css" />
-<link rel="stylesheet" type="text/css" href="/resources/lib/Hui-iconfont/1.0.8/iconfont.css" />
-<link rel="stylesheet" type="text/css" href="/resources/static/h-ui.admin/skin/default/skin.css" id="skin" />
-<link rel="stylesheet" type="text/css" href="/resources/static/h-ui.admin/css/style.css" />
-<!--[if IE 6]>
-<script type="text/javascript" src="/resources/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
-<script>DD_belatedPNG.fix('*');</script>
-<![endif]-->
-<title>菜单管理</title>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/resources/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="/resources/lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/resources/static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/resources/static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="/resources/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="/resources/static/h-ui.admin/skin/default/skin.css" id="skin"/>
+    <link rel="stylesheet" type="text/css" href="/resources/static/h-ui.admin/css/style.css"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="/resources/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <title>菜单管理</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 权限管理 <span class="c-gray en">&gt;</span> 菜单管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 权限管理 <span
+        class="c-gray en">&gt;</span> 菜单管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
+                                              href="javascript:location.replace(location.href);" title="刷新"><i
+        class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	<div class="cl pd-5 bg-1 bk-gray"> <span class="l"> <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" href="javascript:;" onclick="admin_role_add('添加菜单','admin-role-add.html','800')"><i class="Hui-iconfont">&#xe600;</i> 添加菜单</a> </span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
-	<table class="table table-border table-bordered table-hover table-bg">
-		<thead>
-			<tr>
-				<th scope="col" colspan="6">角色管理</th>
-			</tr>
-			<tr class="text-c">
-				<th><input type="checkbox" value="" name=""></th>
-				<th>名称</th>
-				<th>权限名称</th>
-				<th>上级菜单</th>
-				<th>类型</th>
-				<th width="70">链接</th>
-				<th>创建时间</th>
-				<th>创建人</th>
-				<th>排序</th>
-				<th>状态</th>
-				<th>操作</th>
-			</tr>
-		</thead>
-		<tbody>
-			<!--<tr class="text-c">-->
-				<!--<td><input type="checkbox" value="" name=""></td>-->
-				<!--<td>1</td>-->
-				<!--<td>超级管理员</td>-->
-				<!--<td><a href="#">admin</a></td>-->
-				<!--<td>拥有至高无上的权利</td>-->
-				<!--<td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','admin-role-add.html','1')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>-->
-			<!--</tr>-->
-			<!--<tr class="text-c">-->
-				<!--<td><input type="checkbox" value="" name=""></td>-->
-				<!--<td>2</td>-->
-				<!--<td>总编</td>-->
-				<!--<td><a href="#">张三</a></td>-->
-				<!--<td>具有添加、审核、发布、删除内容的权限</td>-->
-				<!--<td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','admin-role-add.html','2')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>-->
-			<!--</tr>-->
-			<!--<tr class="text-c">-->
-				<!--<td><input type="checkbox" value="" name=""></td>-->
-				<!--<td>3</td>-->
-				<!--<td>栏目主辑</td>-->
-				<!--<td><a href="#">李四</a>，<a href="#">王五</a></td>-->
-				<!--<td>只对所在栏目具有添加、审核、发布、删除内容的权限</td>-->
-				<!--<td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','admin-role-add.html','3')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>-->
-			<!--</tr>-->
-			<!--<tr class="text-c">-->
-				<!--<td><input type="checkbox" value="" name=""></td>-->
-				<!--<td>4</td>-->
-				<!--<td>栏目编辑</td>-->
-				<!--<td><a href="#">赵六</a>，<a href="#">钱七</a></td>-->
-				<!--<td>只对所在栏目具有添加、删除草稿等权利。</td>-->
-				<!--<td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','admin-role-add.html','4')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>-->
-			<!--</tr>-->
-		</tbody>
-	</table>
+    <div class="cl pd-5 bg-1 bk-gray"><span class="l"> <a href="javascript:;" onclick="datadel()"
+                                                          class="btn btn-danger radius"><i
+            class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" href="javascript:;"
+                                                          onclick="admin_role_add('添加菜单','admin-role-add.html','800')"><i
+            class="Hui-iconfont">&#xe600;</i> 添加菜单</a> </span> <span class="r">共有数据：<strong>54</strong> 条</span></div>
+    <table class="table table-border table-bordered table-hover table-bg">
+        <thead>
+        <tr>
+            <th scope="col" colspan="6">角色管理</th>
+        </tr>
+        <tr class="text-c">
+            <th><input type="checkbox" value="" name=""></th>
+            <th>名称</th>
+            <th>权限名称</th>
+            <th>上级菜单</th>
+            <th>类型</th>
+            <th width="70">链接</th>
+            <th>创建时间</th>
+            <th>创建人</th>
+            <th>排序</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody id="tab">
+        <!--<tr class="text-c">-->
+        <!--<td><input type="checkbox" value="" name=""></td>-->
+        <!--<td>1</td>-->
+        <!--<td>超级管理员</td>-->
+        <!--<td><a href="#">admin</a></td>-->
+        <!--<td>拥有至高无上的权利</td>-->
+        <!--<td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','admin-role-add.html','1')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>-->
+        <!--</tr>-->
+        <!--<tr class="text-c">-->
+        <!--<td><input type="checkbox" value="" name=""></td>-->
+        <!--<td>2</td>-->
+        <!--<td>总编</td>-->
+        <!--<td><a href="#">张三</a></td>-->
+        <!--<td>具有添加、审核、发布、删除内容的权限</td>-->
+        <!--<td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','admin-role-add.html','2')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>-->
+        <!--</tr>-->
+        <!--<tr class="text-c">-->
+        <!--<td><input type="checkbox" value="" name=""></td>-->
+        <!--<td>3</td>-->
+        <!--<td>栏目主辑</td>-->
+        <!--<td><a href="#">李四</a>，<a href="#">王五</a></td>-->
+        <!--<td>只对所在栏目具有添加、审核、发布、删除内容的权限</td>-->
+        <!--<td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','admin-role-add.html','3')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>-->
+        <!--</tr>-->
+        <!--<tr class="text-c">-->
+        <!--<td><input type="checkbox" value="" name=""></td>-->
+        <!--<td>4</td>-->
+        <!--<td>栏目编辑</td>-->
+        <!--<td><a href="#">赵六</a>，<a href="#">钱七</a></td>-->
+        <!--<td>只对所在栏目具有添加、删除草稿等权利。</td>-->
+        <!--<td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','admin-role-add.html','4')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>-->
+        <!--</tr>-->
+        </tbody>
+    </table>
 </div>
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="/resources/lib/jquery/1.9.1/jquery.min.js"></script>
@@ -89,31 +97,107 @@
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="/resources/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
-/*管理员-角色-添加*/
-function admin_role_add(title,url,w,h){
-	layer_show(title,url,w,h);
-}
-/*管理员-角色-编辑*/
-function admin_role_edit(title,url,id,w,h){
-	layer_show(title,url,w,h);
-}
-/*管理员-角色-删除*/
-function admin_role_del(obj,id){
-	layer.confirm('角色删除须谨慎，确认要删除吗？',function(index){
-		$.ajax({
-			type: 'POST',
-			url: '',
-			dataType: 'json',
-			success: function(data){
-				$(obj).parents("tr").remove();
-				layer.msg('已删除!',{icon:1,time:1000});
-			},
-			error:function(data) {
-				console.log(data.msg);
-			},
-		});		
-	});
-}
+    /*管理员-角色-添加*/
+    function admin_role_add(title, url, w, h) {
+        layer_show(title, url, w, h);
+    }
+    /*管理员-角色-编辑*/
+    function admin_role_edit(title, url, id, w, h) {
+        layer_show(title, url, w, h);
+    }
+    /*管理员-角色-删除*/
+    function admin_role_del(obj, id) {
+        layer.confirm('角色删除须谨慎，确认要删除吗？', function (index) {
+            $.ajax({
+                type: 'POST',
+                url: '',
+                dataType: 'json',
+                success: function (data) {
+                    $(obj).parents("tr").remove();
+                    layer.msg('已删除!', {icon: 1, time: 1000});
+                },
+                error: function (data) {
+                    console.log(data.msg);
+                },
+            });
+        });
+    }
+
+
+    //        new 这就是页面的输入的内容
+    function addNewTR(cost_id, name, base_duration, base_cost, unit_cost, creatime, startime, status) {
+        var td1 = $("<td></td>").html("<p>" + cost_id + "</p>");
+        var td2 = $("<td></td>")
+        var td3 = $("<td></td>")
+        if (base_duration == null) {
+            $("<p></p>").appendTo(td3)
+        } else {
+            $("<p>" + base_duration + "小时</p>").appendTo(td3)
+        }
+        var td4 = $("<td></td>")
+
+        if (base_cost == null) {
+            $("<p></p>").appendTo(td4)
+        } else {
+            $("<p>" + base_cost + "元</p>").appendTo(td4)
+        }
+        var td5 = $("<td></td>")
+
+        if (unit_cost == null) {
+            $("<p></p>").appendTo(td5)
+        } else {
+            $("<p>" + unit_cost + "元/小时</p>").appendTo(td5)
+        }
+
+        //这里把time类型转为date类型
+        var td6 = $("<td></td>").html("<p>" + creatime == 0 | creatime == null ? "" : new Date(parseInt(creatime)).toLocaleString() + "</p>")
+        var td7 = $("<td></td>").html("<p>" + startime == 0 | startime == null ? "" : new Date(parseInt(startime)).toLocaleString() + "</p>")
+        var td8 = $("<td></td>").html("<p>" + status + "</p>")
+        var td9 = $("<td></td>")
+        if (status == "开通") {
+            $("<p>启用成功</p>").appendTo(td9)
+        } else {
+            $("<input type='button' value='启用' class='btn_start'/>").appendTo(td9).click(startFee).attr("QyId", cost_id);
+            $("<input type='button' value='修改' class='btn_modify'/>").appendTo(td9).click(updateUp).attr("updateId", cost_id)
+            $("<input type='button' value='删除' class='btn_delete'/>").appendTo(td9).click(deleteFee).attr("deleteId", cost_id)
+        }
+        $("<a href='#'></a>").html("<p>" + name + "</p>").appendTo(td2).click(findByname).attr("findBynameId", cost_id)
+        var append = $("<tr></tr>").append(td1).append(td2).append(td3).append(td4).append(td5).append(td6).append(td7).append(td8).append(td9);
+        $("#tab").append(append)
+    }
+
+    pageAll(0, 1, 3);
+
+    //分页
+    function pageAll(info, pageNum, pageSize) {
+        alert(1);
+        $.ajax({
+            type: "post",
+            url: "/pageAll",
+            data: {
+                info: info,
+                pageNum: pageNum,
+                pageSize: pageSize
+            },
+            success: function (result) {
+//                    console.log(result);
+			var list = result.list;
+			//这块注意一下
+			$("#tab").html("");
+			$("#page").html("");
+			//调用分页方法
+			//传入两个参数 一个结果集 一个地址
+			showPage(result, "/pageAll")
+			for (var i = 0; i < list.length; i++) {
+				addNewTR(list[i].cost_id, list[i].name, list[i].base_duration, list[i].base_cost,
+						list[i].unit_cost, list[i].creatime, list[i].startime, list[i].status);
+			}
+
+            }
+
+        })
+
+    }
 </script>
 </body>
 </html>
