@@ -1,5 +1,8 @@
 package com.baidu.base.shiro;
 
+import com.baidu.base.service.MainService;
+import com.baidu.base.service.impl.MainServiceImpl;
+import com.baidu.user.domain.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -7,7 +10,9 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.web.subject.WebSubject;
+import org.springframework.stereotype.Controller;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,7 +22,12 @@ import java.util.List;
 /**
  * Created by dllo on 2017/12/4.
  */
+
 public class MyRealm extends AuthorizingRealm {
+    @Resource
+    private MainService mainService;
+
+
     @Override
     public String getName() {
         return "myRealm";
@@ -67,16 +77,18 @@ public class MyRealm extends AuthorizingRealm {
 
         //此处应该拿username去数据库查询, 是否存在该用户
         //============>下面为模拟代码<===============
-        if (!"wangwu".equals(username)) {
-
+        System.out.println(mainService);
+        User user = mainService.findByUsername(username);
+        if (user == null) {
             throw new UnknownAccountException("用户名不存在");
         }
         //============>模拟结束<===================
         String password = new String((char[]) token.getCredentials());
 
+        User user1 = new User(username, password);
 
-        if (!"1234".equals(password)) {
-
+        User user2 = mainService.findSingle(user1);
+        if (user2 == null) {
             throw new IncorrectCredentialsException("密码错误");
         }
 
