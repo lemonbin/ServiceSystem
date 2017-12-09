@@ -31,9 +31,11 @@
                 /resources/static/** = anon
                 /resources/temp/** = anon
                 /getVerifyCode = anon
-                /checkCode = anon
-
-
+                /retrieve-password = anon
+                /retrieve-pwd = anon
+                /checkAdmin = anon
+                /checkEmail = anon
+                /retrievePWD = anon
                 <!--/loginSubmit = anon-->
                 <!-- authc: 需要认证才可以访问 -->
 

@@ -25,4 +25,9 @@ public class MainServiceImpl implements MainService{
     public User findSingle(User user1) {
         return mainMapper.findSingle(user1);
     }
+
+    @Override
+    public void updatePassword(User user) {
+        mainMapper.updatePassword(user);
+    }
 }

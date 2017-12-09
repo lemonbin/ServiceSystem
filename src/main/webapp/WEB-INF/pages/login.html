@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE HTML>
-<html>
+
 <head>
     <meta charset="utf-8">
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
@@ -26,6 +26,7 @@
 <body>
 <input type="hidden" id="TenantId" name="TenantId" value=""/>
 <div class="header"></div>
+
 <div class="loginWraper">
     <div id="loginform" class="loginBox">
         <form class="form form-horizontal" action="" method="post">
@@ -41,25 +42,28 @@
                     <input id="password" name="password" type="password" placeholder="密码" class="input-text size-L">
                 </div>
             </div>
-            <div class="row cl">
-                <div class="formControls col-xs-8 col-xs-offset-3">
-                    <input id="verifyCode" class="input-text size-L" type="text" placeholder="验证码"
-                           onblur="checkCode()"
-                           onclick="if(this.value=='验证码:'){this.value='';}" value="" style="width:150px;">
-                    <img id="image" src="/getVerifyCode"> <a id="kanbuq" onclick="getVerifyCode()"
-                                                             href="javascript:;">看不清，换一张</a></div>
-            </div>
-            <div class="row cl">
-                <div class="formControls col-xs-8 col-xs-offset-3">
-                    <label style="float: right" for="online">
-                        <input type="checkbox" name="online" id="online" value="">
-                        记住密码</label>
-                    <span id="codeErr"></span>
+            <div style=" " class="row cl">
+                <div id="ver1" class="formControls col-xs-8 col-xs-offset-3">
+                    <div>
+                        <label>完成验证：</label>
+                        <div id="captcha2">
+                            <p id="wait2" class="show">正在加载验证码......</p>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <div class="row cl">
+                    <div class="formControls col-xs-8 col-xs-offset-3">
+                        <label style="float: right"  for="online">
+                            <input class="btn-danger" onclick="jump()" type="button" id="online" value="忘记密码">
+                            </label>
+                        <span id="codeErr"></span>
+                    </div>
                 </div>
             </div>
             <div class="row cl">
                 <div class="formControls col-xs-8 col-xs-offset-3">
-                    <input name="" type="button" onclick="loginSubmit()" class="btn btn-success radius size-L"
+                    <input name="" id="submit2" type="button" class="btn btn-success radius size-L"
                            value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
                     <input name="" type="reset" class="btn btn-default radius size-L"
                            value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
@@ -70,64 +74,80 @@
 </div>
 <div class="footer">大黄蜂 ll v3.1</div>
 <script type="text/javascript" src="/resources/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/resources/lib/jquery/1.9.1/gt.js"></script>
+<script type="text/javascript" src="/resources/lib/jquery/1.9.1/jquerysession.js"></script>
+<script type="text/javascript" src="/resources/lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="/resources/static/h-ui/js/H-ui.min.js"></script>
+
 <!--此乃百度统计代码，请自行删除-->
 <script>
-    function getVerifyCode() {
-        $("#image").attr("src", "/getVerifyCode?index=" + Math.random());
-    }
+    $.ajax({
+        url: "/getVerifyCode?index=" + Math.random(), // 加随机数防止缓存
+        type: "get",
+        dataType: "json",
+        success: function (data) {
+            // 调用 initGeetest 初始化参数
+            // 参数1：配置参数
+            // 参数2：回调，回调的第一个参数验证码对象，之后可以使用它调用相应的接口
+            initGeetest({
+                gt: data.gt,
+                challenge: data.challenge,
+                new_captcha: data.new_captcha, // 用于宕机时表示是新验证码的宕机
+                offline: !data.success, // 表示用户后台检测极验服务器是否宕机，一般不需要关注
+                product: "popup", // 产品形式，包括：float，popup
+                width: "100%"
+            }, handler2);
+        }
+    });
 
-    function loginSubmit() {
-        var username = $.trim($("#username").val());
-        var password = $.trim($("#password").val());
-        if (check(username, password)) {
-            $.ajax({
-                type: "post",
-                url: "/loginSubmit",
-                data: {
-                    username: $("#username").val(),
-                    password: $("#password").val(),
-                },
-                success: function (result) {
-                    if (result.errorCode == 1)
-                        alert(result.message);
-                    else
-                        location.href = "/index";
+    var handler2 = function (captchaObj) {
+        $("#submit2").click(function (e) {
+            if (check()) {
+                var result = captchaObj.getValidate();
+                if (!result) {
+                    layer.alert("请先完成验证")
+                } else {
+                    $.ajax({
+                        type: "post",
+                        url: "/loginSubmit",
+                        data: {
+                            username: $("#username").val(),
+                            password: $("#password").val(),
+                        },
+                        success: function (result) {
+                            if (result.errorCode == 1)
+                                layer.alert(result.message);
+                            else
+                                location.href = "/index"
+                        }
+                    })
                 }
-            })
-        }
-    }
-    function check(username, password) {
+            }
+            e.preventDefault();
+        });
+        // 将验证码加到id为captcha的元素里，同时会有三个input的值用于表单提交
+        captchaObj.appendTo("#captcha2");
+        captchaObj.onReady(function () {
+            $("#wait2").hide();
+        });
+    };
+
+    function check() {
         var boo = true;
-        if (username.length == 0) {
+        if ($.trim($("#username").val()).length == 0) {
             boo = false;
         }
-        if (password.length == 0) {
-            boo = false;
-        }
-        if ($.trim($("#verifyCode").val()).length == 0){
+        if ($.trim($("#password").val()).length == 0) {
             boo = false;
         }
         if (!boo) {
-            alert("输入的数据不能为空")
+            layer.alert("用户名或密码不能为空")
         }
         return boo;
-
     }
-
-    function checkCode() {
-        $.ajax({
-            type: "get",
-            url: "/checkCode",
-            data: {
-                verifyCode: $("#verifyCode").val()
-            },
-            success: function (result) {
-                $("#codeErr").html(result.message);
-            }
-        })
+    function jump() {
+        location.href="/retrieve-password"
     }
-
 
 </script>
 </body>

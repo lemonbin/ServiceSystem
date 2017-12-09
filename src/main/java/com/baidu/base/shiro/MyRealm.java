@@ -3,15 +3,19 @@ package com.baidu.base.shiro;
 import com.baidu.base.mapper.MainMapper;
 
 import com.baidu.user.domain.User;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
+import org.apache.shiro.web.subject.WebSubject;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +71,8 @@ public class MyRealm extends AuthorizingRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+
+        ServletRequest request = ((WebSubject) SecurityUtils.getSubject()).getServletRequest();
         //获得用户此次输入的用户名
         String username = (String) token.getPrincipal();
         //此处应该拿username去数据库查询, 是否存在该用户
@@ -83,6 +89,8 @@ public class MyRealm extends AuthorizingRealm {
         User user2 = mainMapper.findSingle(user1);
         if (user2 == null) {
             throw new IncorrectCredentialsException("密码错误");
+        }else {
+            request.getServletContext().setAttribute("d",user2);
         }
         return new SimpleAuthenticationInfo(username, password, getName());
     }
