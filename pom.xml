@@ -165,11 +165,6 @@
         </dependency>
 
         <dependency>
-            <groupId>jstl</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-        </dependency>
-        <dependency>
             <groupId>mockobjects</groupId>
             <artifactId>mockobjects-alt-jdk1.3-j2ee1.3</artifactId>
             <version>0.09</version>
