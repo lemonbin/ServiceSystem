@@ -14,4 +14,9 @@
         SELECT * FROM sys_user WHERE username = #{username} AND password = #{password}
     </select>
 
+    <update id="updatePassword"
+            parameterType="com.baidu.user.domain.User">
+        UPDATE sys_user SET password=#{password} WHERE username=#{username}
+    </update>
+
 </mapper>

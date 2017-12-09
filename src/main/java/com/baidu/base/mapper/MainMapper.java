@@ -10,4 +10,6 @@ public interface MainMapper {
     User findByUsername(String username);
 
     User findSingle(User user1);
+
+    void updatePassword(User user);
 }
