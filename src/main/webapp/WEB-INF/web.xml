@@ -29,7 +29,7 @@
 
     <!--指定spring的配置文件-->
     <servlet>
-        <servlet-name>springmvc</servlet-name>
+        <servlet-name>AServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
@@ -37,7 +37,7 @@
         </init-param>
     </servlet>
     <servlet-mapping>
-        <servlet-name>springmvc</servlet-name>
+        <servlet-name>AServlet</servlet-name>
         <!--处理所有带斜杠的请求, 而struts2这个地方写的是: /* -->
         <url-pattern>/</url-pattern>
     </servlet-mapping>

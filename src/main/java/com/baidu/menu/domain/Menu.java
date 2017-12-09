@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 public class Menu implements Serializable {
 
     private int id;
-    private int parent_id;
+    private int parentId;
     private String icon;
     private String name;
     private String urlkey;
@@ -18,7 +18,7 @@ public class Menu implements Serializable {
     private int type;
     private int sort;
     private int level;
-    private Timestamp create_time;
+    private Timestamp createTime;
     private int create_id;
     private Timestamp update_time;
     private int update_id;
@@ -26,9 +26,9 @@ public class Menu implements Serializable {
     public Menu() {
     }
 
-    public Menu(int id, int parent_id, String icon, String name, String urlkey, String url, int status, int type, int sort, int level, Timestamp create_time, int create_id, Timestamp update_time, int update_id) {
+    public Menu(int id, int parentId, String icon, String name, String urlkey, String url, int status, int type, int sort, int level, Timestamp createTime, int create_id, Timestamp update_time, int update_id) {
         this.id = id;
-        this.parent_id = parent_id;
+        this.parentId = parentId;
         this.icon = icon;
         this.name = name;
         this.urlkey = urlkey;
@@ -37,7 +37,7 @@ public class Menu implements Serializable {
         this.type = type;
         this.sort = sort;
         this.level = level;
-        this.create_time = create_time;
+        this.createTime = createTime;
         this.create_id = create_id;
         this.update_time = update_time;
         this.update_id = update_id;
@@ -47,7 +47,7 @@ public class Menu implements Serializable {
     public String toString() {
         return "Menu{" +
                 "id=" + id +
-                ", parent_id=" + parent_id +
+                ", parentId=" + parentId +
                 ", icon='" + icon + '\'' +
                 ", name='" + name + '\'' +
                 ", urlkey='" + urlkey + '\'' +
@@ -56,7 +56,7 @@ public class Menu implements Serializable {
                 ", type=" + type +
                 ", sort=" + sort +
                 ", level=" + level +
-                ", create_time=" + create_time +
+                ", createTime=" + createTime +
                 ", create_id=" + create_id +
                 ", update_time=" + update_time +
                 ", update_id=" + update_id +
@@ -71,12 +71,12 @@ public class Menu implements Serializable {
         this.id = id;
     }
 
-    public int getParent_id() {
-        return parent_id;
+    public int getParentId() {
+        return parentId;
     }
 
-    public void setParent_id(int parent_id) {
-        this.parent_id = parent_id;
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
     }
 
     public String getIcon() {
@@ -143,12 +143,12 @@ public class Menu implements Serializable {
         this.level = level;
     }
 
-    public Timestamp getCreate_time() {
-        return create_time;
+    public Timestamp getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(Timestamp create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
     }
 
     public int getCreate_id() {

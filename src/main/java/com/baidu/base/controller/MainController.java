@@ -35,6 +35,10 @@ public class MainController {
         return "index";
     }
 
+    @RequestMapping("/admin-role-add")
+    public String roleAdd(){
+        return "admin/admin-role-add";
+    }
     //定位到登录界面
     @RequestMapping("/login")
     public String loginPage() {

@@ -23,6 +23,21 @@
         <!-- 引入mybatis的配置文件 -->
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
 
+
+        <!--分页(mybatis)-->
+        <property name="plugins" >
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+                    <property name="properties">
+                        <value>
+                            dialect=mysql
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+
+
     </bean>
 
     <!-- 3.配置事务 -->
