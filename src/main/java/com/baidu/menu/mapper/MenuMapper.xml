@@ -21,6 +21,7 @@
 
     <select id="selectAll" resultType="com.baidu.menu.domain.ext.ExtMenu">
         SELECT
+            m.id id,
             m.name name,
             m.urlkey urlkey,
             m.parent_id parentId,
@@ -37,22 +38,14 @@
     <select id="findById" parameterType="int" resultType="com.baidu.menu.domain.Menu">
         SELECT * FROM sys_menu WHERE id=#{value}
     </select>
-
-    <select id="findCostAllLimit" parameterType="com.baidu.base.utils.PageBean" resultType="com.baidu.menu.domain.ext.ExtMenu">
-         SELECT
-            m.name name,
-            m.urlkey urlkey,
-            m.parentId parentId,
-            m.type type,
-            m.url url,
-            m.createTime createTime,
-            u.username username,
-            m.sort sort,
-            m.status status
-        FROM sys_user u, sys_menu m WHERE m.create_id=u.id LIMIT #{start},#{pageSize}
-    </select>
+    
 
     <select id="findParent" resultType="com.baidu.menu.domain.Menu">
         SELECT parent_id,name,id FROM sys_menu
     </select>
+
+    <insert id="insert" parameterType="com.baidu.menu.domain.Menu">
+         INSERT INTO sys_menu (parent_id,icon,name,urlkey,url,status,type,sort,level,create_time,create_id,update_time)
+         VALUES (#{parentId},#{icon},#{name},#{urlkey},#{url},#{status},#{type},#{sort},#{level},#{createTime},#{create_id},#{update_time})
+    </insert>
 </mapper>

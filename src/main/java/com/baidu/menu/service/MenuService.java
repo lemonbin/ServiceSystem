@@ -16,8 +16,9 @@ public interface MenuService {
     List<ExtMenu> findAll();
 
     Menu findById(int parent_id);
-
-    PageBean<ExtMenu> findCostAllLimit(int pageNum, int pageSize);
+    
 
     List<Menu> findParent();
+
+    int insert(Menu menu);
 }

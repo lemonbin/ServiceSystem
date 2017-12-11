@@ -90,7 +90,7 @@ public class MyRealm extends AuthorizingRealm {
         if (user2 == null) {
             throw new IncorrectCredentialsException("密码错误");
         }else {
-            request.getServletContext().setAttribute("d",user2);
+            request.getServletContext().setAttribute("user",user2);
         }
         return new SimpleAuthenticationInfo(username, password, getName());
     }
