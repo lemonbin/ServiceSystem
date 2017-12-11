@@ -52,57 +52,59 @@ public class MenuController {
         return menuService.findParent();
     }
 
-    @ResponseBody
     @RequestMapping("/addMenu")
-    public AjaxResult addMenu(Menu menu, HttpServletRequest request) {
-        User user = (User) request.getServletContext().getAttribute("user");
-        menu.setCreate_id(user.getId());
-        menu.setIcon("&#xe616;");
-        menu.setStatus(1);
-        if (menu.getParentId() == 0) {
-            menu.setType(1);
-        } else {
-            menu.setType(4);
+    public String addMenu(Menu menu, HttpServletRequest request) {
+        if (menu.getId()==0){
+            System.out.println(1);
+            User user = (User) request.getServletContext().getAttribute("user");
+            menu.setCreateId(user.getId());
+            menu.setIcon("&#xe616;");
+            menu.setStatus(1);
+            if (menu.getParentId() == 0) {
+                menu.setType(1);
+            } else {
+                menu.setType(4);
+            }
+            menu.setLevel(1);
+            Date now = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            menu.setCreateTime(Timestamp.valueOf(dateFormat.format(now)));
+            menu.setUpdateTime(Timestamp.valueOf(dateFormat.format(now)));
+            List<ExtMenu> all = menuService.findAll();
+            menu.setSort(all.size() + 1);
+            menuService.insert(menu);
+        }else {
+            if(menu.getUrl().contains("无")){
+                menu.setUrl("");
+            }
+            Date now = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            menu.setUpdateTime(Timestamp.valueOf(dateFormat.format(now)));
+            User user = (User) request.getServletContext().getAttribute("user");
+            menu.setUpdateId(user.getId());
+            menuService.update(menu);
         }
-        menu.setLevel(1);
-        Date now = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        menu.setCreateTime(Timestamp.valueOf(dateFormat.format(now)));
-        menu.setUpdate_time(Timestamp.valueOf(dateFormat.format(now)));
-        List<ExtMenu> all = menuService.findAll();
-        menu.setSort(all.size() + 1);
-        AjaxResult ajaxResult = new AjaxResult();
-        int insert = menuService.insert(menu);
-        if (insert > 0) {
-            ajaxResult.setMessage("添加成功");
-
-        } else {
-            ajaxResult.setMessage("添加失败");
-        }
-        return ajaxResult;
+        return "/admin-role";
     }
 
-//    @ResponseBody
-//    @RequestMapping("/admin-role-edit")
-//    public Menu admin_role_edit(Integer id) {
-//
-//        System.out.println(menuService.findById(id));
-//        return menuService.findById(id);
-//    }
+    @ResponseBody
+    @RequestMapping("/editMenu")
+    public Menu admin_role_edit(Integer id) {
+        return menuService.findById(id);
+    }
 
     @RequestMapping("/admin-role-edit")
-    public String admin_role_edit(int id) {
-        return "admin/admin-role-add?id=" + id + "";
+    public String admin_role_edit() {
+        return "admin/admin-role-add";
     }
 
     @ResponseBody
     @RequestMapping("/selectAllMenu")
-    public List<Menu> selectAllMenu(Integer parent_id){
-        if (parent_id == null){
+    public List<Menu> selectAllMenu(Integer parent_id) {
+        if (parent_id == null) {
             parent_id = 0;
         }
-        List<Menu> menus = menuService.selectAllMenu(parent_id);
-        return menus;
+        return menuService.selectAllMenu(parent_id);
     }
 
 }

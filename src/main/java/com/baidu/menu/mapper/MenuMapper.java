@@ -1,6 +1,5 @@
 package com.baidu.menu.mapper;
 
-import com.baidu.base.utils.PageBean;
 import com.baidu.menu.domain.Menu;
 import com.baidu.menu.domain.ext.ExtMenu;
 
@@ -15,13 +14,11 @@ public interface MenuMapper {
 
     Menu findById(int parent_id);
 
-    List<ExtMenu> findCostAllLimit(PageBean<ExtMenu> pb);
-
     List<Menu> findParent();
 
     int insert(Menu menu);
 
     List<Menu> selectAllMenu(int parent_id);
 
-
+    int update(Menu menu);
 }

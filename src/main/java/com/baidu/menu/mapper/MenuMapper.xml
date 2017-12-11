@@ -14,9 +14,9 @@
         <result column="sort" property="sort"/>
         <result column="level" property="level"/>
         <result column="createTime" property="createTime"/>
-        <result column="create_id" property="create_id"/>
-        <result column="update_time" property="update_time"/>
-        <result column="update_id" property="update_id"/>
+        <result column="create_id" property="createId"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_id" property="updateId"/>
     </resultMap>
 
     <select id="selectAll" resultType="com.baidu.menu.domain.ext.ExtMenu">
@@ -46,10 +46,16 @@
 
     <insert id="insert" parameterType="com.baidu.menu.domain.Menu">
          INSERT INTO sys_menu (parent_id,icon,name,urlkey,url,status,type,sort,level,create_time,create_id,update_time)
-         VALUES (#{parentId},#{icon},#{name},#{urlkey},#{url},#{status},#{type},#{sort},#{level},#{createTime},#{create_id},#{update_time})
+         VALUES (#{parentId},#{icon},#{name},#{urlkey},#{url},#{status},#{type},#{sort},#{level},#{createTime},#{createId},#{updateTime})
     </insert>
 
     <select id="selectAllMenu" parameterType="int" resultType="com.baidu.menu.domain.Menu">
         SELECT * FROM sys_menu WHERE parent_id = #{value}
     </select>
+
+    <update id="update" parameterType="com.baidu.menu.domain.Menu" >
+        update sys_menu SET parent_id=#{parentId},name=#{name},urlkey=#{urlkey},url=#{url},
+        update_id=#{updateId},update_time=#{updateTime}
+        where id = #{id}
+    </update>
 </mapper>

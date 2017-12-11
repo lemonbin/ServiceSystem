@@ -58,4 +58,9 @@ public class MenuServiceImpl implements MenuService {
         return menuMapper.selectAllMenu(parent_id);
     }
 
+    @Override
+    public int update(Menu menu) {
+        return menuMapper.update(menu);
+    }
+
 }

@@ -32,16 +32,17 @@
 <body>
 <article class="page-container">
     <form action="/addMenu" method="post" class="form form-horizontal" id="form-admin-role-add">
+        <input type="hidden" id="menuId" value="0" name="id">
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>名称：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="" placeholder="" id="articletitle" name="name">
+                <input type="text" class="input-text" value="" placeholder="" id="name" name="name">
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>权限名称：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="" placeholder="" id="articletitle2" name="urlkey">
+                <input type="text" class="input-text" value="" placeholder="" id="urlkey" name="urlkey">
             </div>
         </div>
         <div class="row cl">
@@ -55,7 +56,7 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>链接：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="" placeholder="" id="articlesort" name="url">
+                <input type="text" class="input-text" value="" placeholder="" id="url" name="url">
             </div>
         </div>
         <div class="row cl">
@@ -81,31 +82,48 @@
 <script type="text/javascript" src="/resources/lib/jquery.validation/1.14.0/messages_zh.js"></script>
 <script type="text/javascript">
 
-    alert(1);
-    function GetQueryString(name)
-    {
-        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);
-        if(r!=null)return unescape(r[2]); return null;
+        if (r != null)return unescape(r[2]);
+        return null;
     }
-    alert(GetQueryString("id"));
-
+    var a= GetQueryString("id");
     $(function () {
-
-        console.log(1111111);
-        alert(1);
         $.ajax({
             type: "post",
             url: "/showparent",
             data: null,
             success: function (list) {
                 for (var i = 0; i < list.length; i++) {
-                    showParent(list[i].parentId, list[i].name,list[i].id);
+                    showParent(list[i].parentId, list[i].name, list[i].id);
                 }
             }
         });
 
-        function showParent(parentId, name,id) {
+        if (a != null) {
+            $.ajax({
+                type: "post",
+                url: "/editMenu",
+                data: {
+                    id: a
+                },
+                success: function (list) {
+                    $("#menuId").attr("value", list.id);
+                    $("#name").attr("value", list.name);
+                    $("#urlkey").attr("value", list.urlkey);
+                    $("#select1  option[value='" + list.parentId + "'] ").attr("selected", true);
+                    if (list.url == '' || list.url == null) {
+                        $("#url").attr("value", "无链接")
+                    } else {
+                        $("#url").attr("value", list.url);
+                    }
+
+                }
+            })
+        }
+
+        function showParent(parentId, name, id) {
             if (parentId == 0) {
                 var a = $("<option value='" + id + "'>" + name + "</option>");
                 $("#select1").append(a);
