@@ -20,4 +20,8 @@ public interface MenuMapper {
     List<Menu> findParent();
 
     int insert(Menu menu);
+
+    List<Menu> selectAllMenu(int parent_id);
+
+
 }

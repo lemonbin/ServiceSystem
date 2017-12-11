@@ -26,6 +26,8 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -55,6 +57,7 @@ public class MainController {
     //定位到登录界面
     @RequestMapping("/login")
     public String loginPage() {
+
         if (SecurityUtils.getSubject().isAuthenticated()) {
             return "index";
         }

@@ -94,4 +94,15 @@ public class MenuController {
     public String admin_role_edit(int id) {
         return "admin/admin-role-add?id=" + id + "";
     }
+
+    @ResponseBody
+    @RequestMapping("/selectAllMenu")
+    public List<Menu> selectAllMenu(Integer parent_id){
+        if (parent_id == null){
+            parent_id = 0;
+        }
+        List<Menu> menus = menuService.selectAllMenu(parent_id);
+        return menus;
+    }
+
 }

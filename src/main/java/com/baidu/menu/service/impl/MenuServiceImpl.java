@@ -52,4 +52,10 @@ public class MenuServiceImpl implements MenuService {
     public int insert(Menu menu) {
         return menuMapper.insert(menu);
     }
+
+    @Override
+    public List<Menu> selectAllMenu(int parent_id) {
+        return menuMapper.selectAllMenu(parent_id);
+    }
+
 }

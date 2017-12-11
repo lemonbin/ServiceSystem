@@ -16,9 +16,12 @@ public interface MenuService {
     List<ExtMenu> findAll();
 
     Menu findById(int parent_id);
-    
+
 
     List<Menu> findParent();
 
     int insert(Menu menu);
+
+    List<Menu> selectAllMenu(int parent_id);
+
 }
