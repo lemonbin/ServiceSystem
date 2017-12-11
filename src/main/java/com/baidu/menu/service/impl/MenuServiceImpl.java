@@ -77,4 +77,10 @@ public class MenuServiceImpl implements MenuService {
     public List<Menu> findParent() {
         return menuMapper.findParent();
     }
+
+    @Override
+    public List<Menu> selectAllMenu(int parent_id) {
+        return menuMapper.selectAllMenu(parent_id);
+    }
+
 }

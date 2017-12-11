@@ -75,4 +75,15 @@ public class MenuController {
 
         return null;
     }
+
+    @ResponseBody
+    @RequestMapping("/selectAllMenu")
+    public List<Menu> selectAllMenu(Integer parent_id){
+        if (parent_id == null){
+            parent_id = 0;
+        }
+        List<Menu> menus = menuService.selectAllMenu(parent_id);
+        return menus;
+    }
+
 }

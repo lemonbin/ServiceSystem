@@ -20,4 +20,7 @@ public interface MenuService {
     PageBean<ExtMenu> findCostAllLimit(int pageNum, int pageSize);
 
     List<Menu> findParent();
+
+    List<Menu> selectAllMenu(int parent_id);
+
 }

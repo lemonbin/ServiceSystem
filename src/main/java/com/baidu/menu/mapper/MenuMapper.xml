@@ -55,4 +55,8 @@
     <select id="findParent" resultType="com.baidu.menu.domain.Menu">
         SELECT parent_id,name,id FROM sys_menu
     </select>
+
+    <select id="selectAllMenu" parameterType="int" resultType="com.baidu.menu.domain.Menu">
+        SELECT * FROM sys_menu WHERE parent_id = #{value}
+    </select>
 </mapper>

@@ -18,4 +18,8 @@ public interface MenuMapper {
     List<ExtMenu> findCostAllLimit(PageBean<ExtMenu> pb);
 
     List<Menu> findParent();
+
+    List<Menu> selectAllMenu(int parent_id);
+
+
 }
