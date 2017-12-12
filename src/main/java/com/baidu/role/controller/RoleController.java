@@ -23,11 +23,18 @@ public class RoleController {
     @Resource
     private RoleService roleService;
 
+    /**
+     * 跳转
+     */
     @RequestMapping("/admin-permission-add")
     public String admin_permission_add() {
         return "admin/admin-permission-add";
     }
 
+    /**
+     * 查询所有
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/getAllRole")
     public List<Role> getAllRole() {
@@ -106,6 +113,23 @@ public class RoleController {
     @RequestMapping("admin/datadel")
     public boolean del(@RequestParam("del") String del) {
         return roleService.datadel(del);
-
     }
+
+    /**
+     * 回显
+     */
+    @RequestMapping("/admin-permission-edit")
+    public String admin_role_edit() {
+        return "admin/admin-permission-add";
+    }
+
+    /**
+     * 编辑
+     */
+    @ResponseBody
+    @RequestMapping("/editRole")
+    public Role editRole(Integer id){
+        return roleService.findById(id);
+    }
+
 }

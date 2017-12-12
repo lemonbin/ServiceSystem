@@ -42,6 +42,7 @@
         LEFT JOIN sys_role_user ru
         ON u.id = ru.userId
         LEFT JOIN sys_role r
-        ON ru.roleid = r.id
+        ON ru.roleId = r.id
     </select>
+
 </mapper>

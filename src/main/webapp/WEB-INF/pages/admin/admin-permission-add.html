@@ -80,7 +80,31 @@
 <script type="text/javascript" src="/resources/lib/jquery.validation/1.14.0/validate-methods.js"></script>
 <script type="text/javascript" src="/resources/lib/jquery.validation/1.14.0/messages_zh.js"></script>
 <script type="text/javascript">
+    // 获取路径中的参数
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null)return unescape(r[2]);
+        return null;
+    }
+    var a= GetQueryString("id");
     $(function () {
+        if (a != null) {
+            $.ajax({
+                type: "post",
+                url: "/editRole",
+                data: {
+                    id: a
+                },
+                success: function (role) {
+                    $("#name").val(role.name)
+                    $("#remark").val(role.remark)
+                    $("#menu2").val(role)
+                }
+            })
+        }
+
+        // 验证
         $("#form-admin-role-add").validate({
             rules: {
                 roleName: {
@@ -96,8 +120,27 @@
                 parent.layer.close(index);
             }
         });
-
     });
+
+//    $(function () {
+//        $("#form-admin-role-add").validate({
+//            rules: {
+//                roleName: {
+//                    required: true,
+//                },
+//            },
+//            onkeyup: false,
+//            focusCleanup: true,
+//            success: "valid",
+//            submitHandler: function (form) {
+//                $(form).ajaxSubmit();
+//                var index = parent.layer.getFrameIndex(window.name);
+//                parent.layer.close(index);
+//            }
+//        });
+//
+//    });
+    // 二级联动回显
     $.ajax({
         type: 'get',
         url: '/selectAllMenu',
@@ -109,6 +152,7 @@
             })
         }
     });
+    // 二级联动回显
     function selectMenu2(parent_id) {
         $.ajax({
             type: 'get',
@@ -123,6 +167,8 @@
         })
     }
 
+
+    // 保存role
     function showResult() {
         $.ajax({
             type: "post",

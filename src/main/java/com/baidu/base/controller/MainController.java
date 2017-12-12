@@ -51,10 +51,13 @@ public class MainController {
     }
 
     @RequestMapping("/admin-role-add")
-    public String roleAdd(){
+    public String roleAdd() {
         return "admin/admin-role-add";
     }
-    //定位到登录界面
+
+    /**
+     * 定位到登录界面
+     */
     @RequestMapping("/login")
     public String loginPage() {
 
@@ -70,15 +73,13 @@ public class MainController {
     }
 
 
-    //登录表单验证
+    /**
+     * 登录表单验证
+     */
     @ResponseBody
     @RequestMapping("/loginSubmit")
     public AjaxResult loginSubmit(HttpServletRequest request) throws IOException {
         AjaxResult ajaxResult = new AjaxResult();
-        //如果在shiro spring文件中, 配置了表单认证过滤器
-        //那么在这个方法中只需要处理异常信息即可
-
-//        SecurityUtils.getSubject()
 
         String exClassName = (String) request.getAttribute("shiroLoginFailure");
 
@@ -108,6 +109,11 @@ public class MainController {
         return "admin/admin-list";
     }
 
+    /**
+     * 忘记密码修改
+     * @param user User对象
+     * @throws MessagingException
+     */
     @ResponseBody
     @RequestMapping("/retrieve-pwd")
     public AjaxResult retrieve_pwd(User user, HttpServletRequest request) throws MessagingException {
@@ -150,12 +156,22 @@ public class MainController {
         return ajaxResult;
     }
 
+    /**
+     * 修改
+     * @param user
+     * @return
+     */
     @RequestMapping("/retrievePWD")
     public String retrievePWD(User user) {
         mainService.updatePassword(user);
         return "_blank";
     }
 
+    /**
+     * 校验用户名
+     * @param username 用户名
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/checkAdmin")
     public AjaxResult checkAdmin(String username) {
@@ -168,6 +184,11 @@ public class MainController {
         return ajaxResult;
     }
 
+    /**
+     * 校验邮箱
+     * @param user1
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/checkEmail")
     public AjaxResult checkEmail(User user1) {
@@ -185,6 +206,12 @@ public class MainController {
         return ajaxResult;
     }
 
+    /**
+     * 获取动态验证
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     @RequestMapping("/getVerifyCode")
     public void register2(HttpServletRequest request, HttpServletResponse response) throws IOException {
         GeetestLib gtSdk = new GeetestLib(GeetestConfig.getGeetest_id(), GeetestConfig.getGeetest_key(),
