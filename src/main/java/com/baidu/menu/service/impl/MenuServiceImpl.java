@@ -68,4 +68,16 @@ public class MenuServiceImpl implements MenuService {
         return menuMapper.deleteMenuById(id);
     }
 
+    @Override
+    public PageInfo<ExtMenu> fuzzySearch(String name, Integer pageNum, Integer PageSize) {
+        pageNum = pageNum == null ? 1 : pageNum;
+        PageSize = PageSize == null ? 3 : PageSize;
+
+        PageHelper.startPage(pageNum, PageSize);
+
+        List<ExtMenu> all = menuMapper.fuzzySearch(name);
+        PageInfo<ExtMenu> pageInfo = new PageInfo<ExtMenu>(all);
+        return pageInfo;
+    }
+
 }

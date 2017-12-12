@@ -127,5 +127,24 @@ public class MenuController {
         return "删除成功";
     }
 
+    //分页+查询所有
+    @ResponseBody
+    @RequestMapping("/fuzzySearch")
+    public PageInfo<ExtMenu> fuzzySearch(String name,
+            Integer pageNum,
+            Integer pageSize) {
+        PageInfo<ExtMenu> menuPageInfo = menuService.fuzzySearch(name,pageNum, pageSize);
+        for (ExtMenu extMenu : menuPageInfo.getList()) {
+            if (extMenu.getParentId() == 0) {
+                extMenu.setParent_name("");
+            } else {
+                Menu menu = menuService.findById(extMenu.getParentId());
+                extMenu.setParent_name(menu.getName());
+            }
+        }
+        return menuPageInfo;
+    }
+
+
 
 }

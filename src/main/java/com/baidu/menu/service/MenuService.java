@@ -27,4 +27,6 @@ public interface MenuService {
     int update(Menu menu);
 
     int deleteMenuById(Integer id);
+
+    PageInfo<ExtMenu> fuzzySearch(String name, Integer pageNum, Integer pageSize);
 }

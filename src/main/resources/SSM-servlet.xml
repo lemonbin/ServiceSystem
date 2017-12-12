@@ -24,4 +24,6 @@
         <property name="suffix" value=".html"/>
 
     </bean>
+    <!-- 全局异常捕获, 跳转到错误页面 -->
+    <bean class="com.baidu.base.exception.CustomExceptionResolver"/>
 </beans>

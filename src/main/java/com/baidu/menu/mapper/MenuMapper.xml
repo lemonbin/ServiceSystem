@@ -31,7 +31,7 @@
             u.username username,
             m.sort sort,
             m.status status
-        FROM sys_user u, sys_menu m WHERE m.create_id=u.id
+        FROM  sys_menu m left JOIN sys_user u ON m.create_id=u.id
     </select>
 
 
@@ -53,7 +53,7 @@
         SELECT * FROM sys_menu WHERE parent_id = #{value}
     </select>
 
-    <update id="update" parameterType="com.baidu.menu.domain.Menu" >
+    <update id="update" parameterType="com.baidu.menu.domain.Menu">
         update sys_menu SET parent_id=#{parentId},name=#{name},urlkey=#{urlkey},url=#{url},
         update_id=#{updateId},update_time=#{updateTime}
         where id = #{id}
@@ -62,4 +62,20 @@
     <delete id="deleteMenuById" parameterType="int">
         DELETE FROM sys_menu WHERE id=#{value}
     </delete>
+
+    <select id="fuzzySearch" resultType="com.baidu.menu.domain.ext.ExtMenu" parameterType="String">
+        SELECT
+            m.id id,
+            m.name name,
+            m.urlkey urlkey,
+            m.parent_id parentId,
+            m.type type,
+            m.url url,
+            m.create_time createTime,
+            u.username username,
+            m.sort sort,
+            m.status status
+        FROM  sys_menu m LEFT JOIN sys_user u ON m.create_id=u.id WHERE name LIKE CONCAT('%',#{value},'%')
+    </select>
+
 </mapper>

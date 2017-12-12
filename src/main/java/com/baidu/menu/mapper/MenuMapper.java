@@ -23,4 +23,6 @@ public interface MenuMapper {
     int update(Menu menu);
 
     int deleteMenuById(Integer id);
+
+    List<ExtMenu> fuzzySearch(String name);
 }

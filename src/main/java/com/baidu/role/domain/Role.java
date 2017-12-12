@@ -1,5 +1,7 @@
 package com.baidu.role.domain;
 
+import com.baidu.user.domain.User;
+
 import java.sql.Timestamp;
 
 /**
@@ -13,10 +15,24 @@ public class Role {
     private String remark;
     private Timestamp create_time;
     private int create_id;
+    private User user;
     private Timestamp update_time;
     private int update_id;
 
     public Role() {
+    }
+
+    public Role(int id, String name, int status, int sort, String remark, Timestamp create_time, int create_id, User user, Timestamp update_time, int update_id) {
+        this.id = id;
+        this.name = name;
+        this.status = status;
+        this.sort = sort;
+        this.remark = remark;
+        this.create_time = create_time;
+        this.create_id = create_id;
+        this.user = user;
+        this.update_time = update_time;
+        this.update_id = update_id;
     }
 
     @Override
@@ -32,6 +48,15 @@ public class Role {
                 ", update_time=" + update_time +
                 ", update_id=" + update_id +
                 '}';
+    }
+
+    
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getId() {
