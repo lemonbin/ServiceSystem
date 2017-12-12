@@ -132,15 +132,13 @@
                 status: $("input:radio:checked").val(),
                 remark: $("#remark").val()
             }, success: function (result) {
-                if (result.count > 0) {
-                    alert("保存成功");
-                    findpageAll(null, 1, 3)
-
+                if (result.errorCode > 0) {
+                    layer.alert("保存成功");
+                    window.setTimeout('location.href="/admin-permission"', 2000);
                 }
             }
         })
     }
-
 
 </script>
 <!--/请在上方写此页面业务相关的脚本-->

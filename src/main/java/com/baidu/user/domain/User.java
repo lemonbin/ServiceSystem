@@ -1,6 +1,9 @@
 package com.baidu.user.domain;
 
+import com.baidu.role.domain.Role;
+
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * Created by dllo on 17/12/5.
@@ -28,7 +31,41 @@ public class User {
     private Timestamp update_time;
     private int update_id;
 
+    private List<Role> roles;
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
     public User() {
+    }
+
+    public User(int id, String username, String password, String realname, int role_id, int usertype, int state, String third_id, Timestamp end_time, String email, String tel, String address, String title_url, String remark, String theme, int back_site_id, int create_site_id, Timestamp create_time, int create_id, Timestamp update_time, int update_id) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.realname = realname;
+        this.role_id = role_id;
+        this.usertype = usertype;
+        this.state = state;
+        this.third_id = third_id;
+        this.end_time = end_time;
+        this.email = email;
+        this.tel = tel;
+        this.address = address;
+        this.title_url = title_url;
+        this.remark = remark;
+        this.theme = theme;
+        this.back_site_id = back_site_id;
+        this.create_site_id = create_site_id;
+        this.create_time = create_time;
+        this.create_id = create_id;
+        this.update_time = update_time;
+        this.update_id = update_id;
     }
 
     @Override

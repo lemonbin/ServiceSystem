@@ -25,14 +25,13 @@ public class CustomExceptionResolver implements HandlerExceptionResolver{
         request.setAttribute("msg",ex.getMessage());
 
         try {
-            request.getRequestDispatcher("WEB-INF/pages/404.jsp").forward(request,response);
+            request.getRequestDispatcher("WEB-INF/pages/404.html").forward(request,response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
+        
         return new ModelAndView();
     }
 }
