@@ -108,6 +108,10 @@
             });
         });
     }
+    function updateRole() {
+        var updateId = $(this).attr("updateId");
+        location.href = "/admin-permission-edit?id="+updateId+"";
+    }
 
     //高级搜索
     function fuzzySearch() {
@@ -149,11 +153,6 @@
                 })
             }
         }
-
-
-
-
-
     }
     function sort(obj) {
         if (obj.className == "fa fa-sort-asc") {
@@ -205,7 +204,7 @@
         var td6 = $("<td></td>")
 
         //编辑
-        $("<i  class='Hui-iconfont'>&#xe6df;</i>").appendTo(td6)
+        $("<i  class='Hui-iconfont'>&#xe6df;</i>").appendTo(td6).click(updateRole).attr("updateId",Elp.id);
         //删除
         $("<i  class='Hui-iconfont'>&#xe6e2;</i>").appendTo(td6).click(deleteFee).attr("deleteId",Elp.id)
 

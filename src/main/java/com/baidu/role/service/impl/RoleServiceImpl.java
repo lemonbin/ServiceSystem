@@ -76,7 +76,7 @@ public class RoleServiceImpl implements RoleService{
         } catch (Exception e) {
             return false;
         }
-        
+
         return true;
     }
 
@@ -88,5 +88,10 @@ public class RoleServiceImpl implements RoleService{
         int sort = roleMapper.findMaxSort() + 1;
         role.setSort(sort);
         return roleMapper.save(role);
+    }
+
+    @Override
+    public Role findById(Integer id) {
+        return roleMapper.findRoleById(id);
     }
 }

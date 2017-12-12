@@ -23,4 +23,6 @@ public interface RoleService {
     List<Role> findAllRole();
 
     int save(Role role);
+
+    Role findById(Integer id);
 }

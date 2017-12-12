@@ -20,22 +20,25 @@ public class UserController {
 
     @Resource
     private UserService userService;
+
     @RequestMapping("/admin-add")
-    public String admin_add(){
+    public String admin_add() {
         return "admin/admin-add";
     }
 
     @ResponseBody
     @RequestMapping("/findAllUser")
-    public List<User> getAllUser(){
-        List<User> users =  userService.getAllUser();
+    public List<User> getAllUser() {
+        List<User> users = userService.getAllUser();
         return users;
     }
 
-    //分页 + 查询所有
+    /**
+     * 分页 + 查询所有
+     */
     @ResponseBody
-    @RequestMapping("/getAllUser")
-    public PageInfo<User> pageAllUser(@RequestParam("pageNum")Integer pageNum, @RequestParam("pageSize")Integer pageSize, HttpSession session){
+    @RequestMapping("/pageAllUser")
+    public PageInfo<User> pageAllUser(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize, HttpSession session) {
         PageInfo<User> pageInfo = userService.queryPage(pageNum, pageSize);
         System.out.println(pageInfo);
         return pageInfo;
