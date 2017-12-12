@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -54,8 +55,7 @@ public class MenuController {
 
     @RequestMapping("/addMenu")
     public String addMenu(Menu menu, HttpServletRequest request) {
-        if (menu.getId()==0){
-            System.out.println(1);
+        if (menu.getId() == 0) {
             User user = (User) request.getServletContext().getAttribute("user");
             menu.setCreateId(user.getId());
             menu.setIcon("&#xe616;");
@@ -73,8 +73,8 @@ public class MenuController {
             List<ExtMenu> all = menuService.findAll();
             menu.setSort(all.size() + 1);
             menuService.insert(menu);
-        }else {
-            if(menu.getUrl().contains("无")){
+        } else {
+            if (menu.getUrl().contains("无")) {
                 menu.setUrl("");
             }
             Date now = new Date();
@@ -84,7 +84,7 @@ public class MenuController {
             menu.setUpdateId(user.getId());
             menuService.update(menu);
         }
-        return "/admin-role";
+        return "forward:/admin-role";
     }
 
     @ResponseBody
@@ -106,5 +106,26 @@ public class MenuController {
         }
         return menuService.selectAllMenu(parent_id);
     }
+
+    @ResponseBody
+    @RequestMapping("/admin_role_del")
+    public String admin_role_del(Integer id) {
+        int a = menuService.deleteMenuById(id);
+        if (a > 0) {
+            return "已删除";
+        }
+        return "删除失败";
+    }
+
+    @ResponseBody
+    @RequestMapping("/admin_role_dels")
+    public String admin_role_dels(String ids) {
+        List<String> results = Arrays.asList(ids.split(","));
+        for (String result : results) {
+            menuService.deleteMenuById(Integer.valueOf(result));
+        }
+        return "删除成功";
+    }
+
 
 }

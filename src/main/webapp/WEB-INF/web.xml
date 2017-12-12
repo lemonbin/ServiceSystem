@@ -3,11 +3,13 @@
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
+
     <display-name>Archetype Created Web Application</display-name>
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath*:SSM-shiro.xml,classpath*:SSM-mybatis.xml</param-value>
     </context-param>
+
 
 
     <filter>
@@ -22,6 +24,7 @@
         <filter-name>shiroFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -41,6 +44,7 @@
         <!--处理所有带斜杠的请求, 而struts2这个地方写的是: /* -->
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
 
     <!--<error-page>-->
     <!--<error-code>404</error-code>-->

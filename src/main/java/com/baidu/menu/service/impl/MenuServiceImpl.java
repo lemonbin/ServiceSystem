@@ -63,4 +63,9 @@ public class MenuServiceImpl implements MenuService {
         return menuMapper.update(menu);
     }
 
+    @Override
+    public int deleteMenuById(Integer id) {
+        return menuMapper.deleteMenuById(id);
+    }
+
 }

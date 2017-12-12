@@ -84,6 +84,27 @@
 <script type="text/javascript" src="/resources/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="/resources/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
+    function datadel(){ //jquery获取复选框值
+        var chk_value ="";
+        $('input[name="test"]:checked').each(function(){
+            chk_value += $(this).val()+","
+        });
+        if(chk_value.length==0){
+            alert("你还没有选择任何内容！")
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/admin_role_dels',
+            data:{
+                ids:chk_value
+            },
+            success: function (msg) {
+                layer.msg(msg, {icon: 1, time: 3000});
+                window.setTimeout('location.href = "/admin-role"',2000);
+            }
+        });
+//        alert(chk_value.length==0 ?'你还没有选择任何内容！':chk_value);
+    }
     /*管理员-角色-添加*/
     function admin_role_add(title, url, w, h) {
         layer_show(title, url, w, h);
@@ -93,19 +114,21 @@
         layer_show(title, url, w, h);
     }
     /*管理员-角色-删除*/
-    function admin_role_del(obj, id) {
+    function admin_role_del(id) {
         layer.confirm('角色删除须谨慎，确认要删除吗？', function (index) {
             $.ajax({
                 type: 'POST',
-                url: '',
-                dataType: 'json',
-                success: function (data) {
-                    $(obj).parents("tr").remove();
-                    layer.msg('已删除!', {icon: 1, time: 1000});
+                url: '/admin_role_del',
+                data:{
+                    id:id
                 },
-                error: function (data) {
-                    console.log(data.msg);
+                success: function (msg) {
+                    layer.msg(msg, {icon: 1, time: 3000});
+                    window.setTimeout('location.href = "/admin-role"',2000);
                 },
+                error: function (msg) {
+                    alert(msg);
+                }
             });
         });
     }
@@ -113,27 +136,17 @@
 
         var id = $(this).attr("id");
         admin_role_edit('角色编辑','/admin-role-edit?id='+id+'','800');
-//        location.href = "/admin-role-edit?id="+id+"";
     }
-//    function pEditMenu(id) {
-//        alert(id);
-//        $.ajax({
-//            type: "post",
-//            url: "/admin-role-edit",
-//            data: {
-//                id: id
-//            },
-//            success: function (result) {
-//                alert(result);
-//            }
-//        })
-//    }
+
+    function deleteMenu() {
+        var id = $(this).attr("id");
+        admin_role_del(id);
+    }
+
     pageAll(1, 3);
-    //    <a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','admin-role-add.html','3')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
-    //    <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
-    //        new 这就是页面的输入的内容
+
     function addNewTR(id, name, urlkey, parent_name, type, url, createTime, username, sort, status) {
-        var td1 = $("<td></td>").html("<input type='checkbox' value='' name=''>");
+        var td1 = $("<td></td>").html("<input type='checkbox' value='"+id+"' name='test'>");
         var td2 = $("<td></td>").html(name);
         var td3 = $("<td></td>").html(urlkey);
         var td4 = $("<td></td>").html(parent_name);
@@ -145,7 +158,7 @@
         var td10 = $("<td class='f-14'></td>").html(status);
         var td11 = $("<td></td>");
         $("<a title='编辑' href='javascript:;' style='text-decoration:none'><i class='Hui-iconfont'>&#xe6df;</i> </a>").appendTo(td11).click(editMenu).attr("id", id);
-        $("<a title='删除' href='javascript:;' class='ml-5' style='text-decoration:none'><i class='Hui-iconfont'>&#xe6e2;</i> </a>").appendTo(td11);
+        $("<a title='删除' href='javascript:;' class='ml-5' style='text-decoration:none'><i class='Hui-iconfont'>&#xe6e2;</i> </a>").appendTo(td11).click(deleteMenu).attr("id",id);
         var append = $("<tr class='text-c'></tr>").append(td1).append(td2).append(td3).append(td4).append(td5).append(td6).append(td7).append(td8).append(td9).append(td10).append(td11);
         $("#tab").append(append)
     }

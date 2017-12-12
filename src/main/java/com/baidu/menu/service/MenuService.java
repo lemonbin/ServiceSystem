@@ -25,4 +25,6 @@ public interface MenuService {
     List<Menu> selectAllMenu(int parent_id);
 
     int update(Menu menu);
+
+    int deleteMenuById(Integer id);
 }

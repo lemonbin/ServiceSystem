@@ -58,4 +58,8 @@
         update_id=#{updateId},update_time=#{updateTime}
         where id = #{id}
     </update>
+
+    <delete id="deleteMenuById" parameterType="int">
+        DELETE FROM sys_menu WHERE id=#{value}
+    </delete>
 </mapper>
