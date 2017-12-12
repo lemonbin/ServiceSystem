@@ -19,14 +19,14 @@ public class Menu implements Serializable {
     private int sort;
     private int level;
     private Timestamp createTime;
-    private int create_id;
-    private Timestamp update_time;
-    private int update_id;
+    private int createId;
+    private Timestamp updateTime;
+    private int updateId;
 
     public Menu() {
     }
 
-    public Menu(int id, int parentId, String icon, String name, String urlkey, String url, int status, int type, int sort, int level, Timestamp createTime, int create_id, Timestamp update_time, int update_id) {
+    public Menu(int id, int parentId, String icon, String name, String urlkey, String url, int status, int type, int sort, int level, Timestamp createTime, int createId, Timestamp updateTime, int updateId) {
         this.id = id;
         this.parentId = parentId;
         this.icon = icon;
@@ -38,9 +38,9 @@ public class Menu implements Serializable {
         this.sort = sort;
         this.level = level;
         this.createTime = createTime;
-        this.create_id = create_id;
-        this.update_time = update_time;
-        this.update_id = update_id;
+        this.createId = createId;
+        this.updateTime = updateTime;
+        this.updateId = updateId;
     }
 
     @Override
@@ -57,9 +57,9 @@ public class Menu implements Serializable {
                 ", sort=" + sort +
                 ", level=" + level +
                 ", createTime=" + createTime +
-                ", create_id=" + create_id +
-                ", update_time=" + update_time +
-                ", update_id=" + update_id +
+                ", createId=" + createId +
+                ", updateTime=" + updateTime +
+                ", updateId=" + updateId +
                 '}';
     }
 
@@ -151,27 +151,27 @@ public class Menu implements Serializable {
         this.createTime = createTime;
     }
 
-    public int getCreate_id() {
-        return create_id;
+    public int getCreateId() {
+        return createId;
     }
 
-    public void setCreate_id(int create_id) {
-        this.create_id = create_id;
+    public void setCreateId(int createId) {
+        this.createId = createId;
     }
 
-    public Timestamp getUpdate_time() {
-        return update_time;
+    public Timestamp getUpdateTime() {
+        return updateTime;
     }
 
-    public void setUpdate_time(Timestamp update_time) {
-        this.update_time = update_time;
+    public void setUpdateTime(Timestamp updateTime) {
+        this.updateTime = updateTime;
     }
 
-    public int getUpdate_id() {
-        return update_id;
+    public int getUpdateId() {
+        return updateId;
     }
 
-    public void setUpdate_id(int update_id) {
-        this.update_id = update_id;
+    public void setUpdateId(int updateId) {
+        this.updateId = updateId;
     }
 }

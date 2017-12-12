@@ -89,7 +89,7 @@
         layer_show(title, url, w, h);
     }
     /*管理员-角色-编辑*/
-    function admin_role_edit(title, url, id, w, h) {
+    function admin_role_edit(title, url, w, h) {
         layer_show(title, url, w, h);
     }
     /*管理员-角色-删除*/
@@ -111,10 +111,9 @@
     }
     function editMenu() {
 
-
         var id = $(this).attr("id");
-        location.href = "/admin-role-edit?id="+id+"";
-        pEditMenu(id);
+        admin_role_edit('角色编辑','/admin-role-edit?id='+id+'','800');
+//        location.href = "/admin-role-edit?id="+id+"";
     }
 //    function pEditMenu(id) {
 //        alert(id);
