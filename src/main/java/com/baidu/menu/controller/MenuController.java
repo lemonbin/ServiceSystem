@@ -1,13 +1,11 @@
 package com.baidu.menu.controller;
 
-import com.baidu.base.utils.AjaxResult;
 import com.baidu.menu.domain.Menu;
 import com.baidu.menu.domain.ext.ExtMenu;
 import com.baidu.menu.service.MenuService;
 import com.baidu.user.domain.User;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -47,12 +45,14 @@ public class MenuController {
     }
 
 
+    // 显示下拉框
     @ResponseBody
     @RequestMapping("/showparent")
     public List<Menu> showParent() {
         return menuService.findParent();
     }
 
+    // 添加&编辑 菜单
     @RequestMapping("/addMenu")
     public String addMenu(Menu menu, HttpServletRequest request) {
         if (menu.getId() == 0) {
@@ -87,17 +87,20 @@ public class MenuController {
         return "forward:/admin-role";
     }
 
+    // 编辑跳转界面
     @ResponseBody
     @RequestMapping("/editMenu")
     public Menu admin_role_edit(Integer id) {
         return menuService.findById(id);
     }
 
+    // 编辑
     @RequestMapping("/admin-role-edit")
     public String admin_role_edit() {
         return "admin/admin-role-add";
     }
 
+    // 查询菜单
     @ResponseBody
     @RequestMapping("/selectAllMenu")
     public List<Menu> selectAllMenu(Integer parent_id) {
@@ -107,6 +110,7 @@ public class MenuController {
         return menuService.selectAllMenu(parent_id);
     }
 
+    // 删除
     @ResponseBody
     @RequestMapping("/admin_role_del")
     public String admin_role_del(Integer id) {
@@ -117,6 +121,7 @@ public class MenuController {
         return "删除失败";
     }
 
+    // 删除选中
     @ResponseBody
     @RequestMapping("/admin_role_dels")
     public String admin_role_dels(String ids) {
@@ -127,7 +132,7 @@ public class MenuController {
         return "删除成功";
     }
 
-    //分页+查询所有
+    // 分页+高级查询
     @ResponseBody
     @RequestMapping("/fuzzySearch")
     public PageInfo<ExtMenu> fuzzySearch(String name,
@@ -144,7 +149,5 @@ public class MenuController {
         }
         return menuPageInfo;
     }
-
-
 
 }
