@@ -45,4 +45,9 @@
         ON ru.roleId = r.id
     </select>
 
+    <insert id="addUser" parameterType="com.baidu.user.domain.User">
+        INSERT INTO sys_user (username,password,role_id,email,tel,remark,create_time,create_id)
+        VALUES (#{username},#{password},#{role_id},#{email},#{tel},#{remark},#{create_time},#{create_id})
+    </insert>
+
 </mapper>

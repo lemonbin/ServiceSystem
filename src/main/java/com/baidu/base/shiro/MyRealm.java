@@ -1,5 +1,6 @@
 package com.baidu.base.shiro;
 
+import com.baidu.base.domain.IPAddress;
 import com.baidu.base.mapper.MainMapper;
 
 import com.baidu.user.domain.User;
@@ -16,7 +17,10 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -89,8 +93,17 @@ public class MyRealm extends AuthorizingRealm {
         User user2 = mainMapper.findSingle(user1);
         if (user2 == null) {
             throw new IncorrectCredentialsException("密码错误");
-        }else {
-            request.getServletContext().setAttribute("user",user2);
+        } else {
+            request.getServletContext().setAttribute("user", user2);
+            List<IPAddress> ipAddresses = mainMapper.findIPCount();
+            IPAddress ipAddress1 = ipAddresses.get(ipAddresses.size() - 1);
+            String ip = request.getRemoteAddr();
+            IPAddress ipAddress = new IPAddress();
+            ipAddress.setId(user2.getId());
+            ipAddress.setLogin_time(new Timestamp(new Date().getTime()));
+            ipAddress.setIp(ip);
+            ipAddress.setCount(ipAddress1.getCount() + 1);
+            mainMapper.save(ipAddress);
         }
         return new SimpleAuthenticationInfo(username, password, getName());
     }

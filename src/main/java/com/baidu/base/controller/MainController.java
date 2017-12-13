@@ -216,7 +216,6 @@ public class MainController {
     public void register2(HttpServletRequest request, HttpServletResponse response) throws IOException {
         GeetestLib gtSdk = new GeetestLib(GeetestConfig.getGeetest_id(), GeetestConfig.getGeetest_key(),
                 GeetestConfig.isnewfailback());
-
         String resStr = "{}";
 
         //自定义userid

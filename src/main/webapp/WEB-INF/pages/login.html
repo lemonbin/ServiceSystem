@@ -81,6 +81,9 @@
 
 <!--此乃百度统计代码，请自行删除-->
 <script>
+
+
+
     $.ajax({
         url: "/getVerifyCode?index=" + Math.random(), // 加随机数防止缓存
         type: "get",
@@ -133,6 +136,8 @@
     };
 
     function check() {
+
+
         var boo = true;
         if ($.trim($("#username").val()).length == 0) {
             boo = false;
@@ -142,6 +147,8 @@
         }
         if (!boo) {
             layer.alert("用户名或密码不能为空")
+            var a = $.session.get("admin")
+            alert(a)
         }
         return boo;
     }
