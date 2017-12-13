@@ -15,7 +15,7 @@ public interface RoleService {
 
     boolean deleteTheRole(Integer id);
 
-    PageInfo<Role> GJqueryPage(Role role, Integer pageNum, Integer pageSize);
+    PageInfo<Role> fuzzyQueryPage(Role role, Integer pageNum, Integer pageSize);
 
     boolean datadel(String del);
 

@@ -36,8 +36,16 @@
     </select>
     <select id="findAll" resultMap="ExpResultMap">
 
-        SELECT u.id,u.username,u.state,u.tel,u.email,u.create_time,
-        r.id rid,r.name rname
+        SELECT
+        u.id,
+        u.username,
+        u.state,
+        u.tel,
+        u.email,
+        u.create_time,
+        r.id rid,
+        r.name rname
+
         FROM sys_user u
         LEFT JOIN sys_role_user ru
         ON u.id = ru.userId
@@ -49,5 +57,42 @@
         INSERT INTO sys_user (username,password,role_id,email,tel,remark,create_time,create_id)
         VALUES (#{username},#{password},#{role_id},#{email},#{tel},#{remark},#{create_time},#{create_id})
     </insert>
+
+    <delete id="delById" parameterType="java.lang.Integer">
+        DELETE FROM sys_user WHERE id = #{id}
+    </delete>
+
+    <select id="fuzzyFindAll" resultMap="ExpResultMap" parameterType="com.baidu.user.domain.ext.ExtUser">
+
+        SELECT
+        u.id,
+        u.username,
+        u.state,
+        u.tel,
+        u.email,
+        u.create_time,
+        r.id rid,
+        r.name rname
+
+        FROM sys_user u
+        LEFT JOIN sys_role_user ru
+        ON u.id = ru.userId
+        LEFT JOIN sys_role r
+        ON ru.roleId = r.id
+        <where>
+            1=1
+            <if test="username != ''">
+                AND username LIKE "%"#{username}"%"
+            </if>
+            <if test="datemin != ''">
+                AND u.create_time >= #{datemin}
+            </if>
+            <if test="datemax != ''">
+                AND #{datemax} >= u.create_time
+            </if>
+
+        </where>
+
+    </select>
 
 </mapper>

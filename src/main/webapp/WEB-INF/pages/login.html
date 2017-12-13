@@ -54,9 +54,9 @@
                 </div>
                 <div class="row cl">
                     <div class="formControls col-xs-8 col-xs-offset-3">
-                        <label style="float: right"  for="online">
+                        <label style="float: right" for="online">
                             <input class="btn-danger" onclick="jump()" type="button" id="online" value="忘记密码">
-                            </label>
+                        </label>
                         <span id="codeErr"></span>
                     </div>
                 </div>
@@ -81,8 +81,15 @@
 
 <!--此乃百度统计代码，请自行删除-->
 <script>
-
-
+//    layer.confirm('您本次登录可能会被系统记录信息, 给我小心点!!!', {
+//        btn: ['同意', '拒绝'] //按钮
+//    }, function () {
+//        layer.msg('看样子你很乖', {icon: 1});
+//    }, function () {
+//        layer.msg('你不能访问我们的系统', function () {
+//            location.href = "http://www.baidu.com";
+//        })
+//    });
 
     $.ajax({
         url: "/getVerifyCode?index=" + Math.random(), // 加随机数防止缓存
@@ -153,7 +160,7 @@
         return boo;
     }
     function jump() {
-        location.href="/retrieve-password"
+        location.href = "/retrieve-password"
     }
 
 </script>
