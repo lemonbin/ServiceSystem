@@ -19,4 +19,11 @@
         UPDATE sys_user SET password=#{password} WHERE username=#{username}
     </update>
 
+    <select id="findIP" resultType="com.baidu.base.domain.IPAddress">
+        SELECT * FROM sys_ip
+    </select>
+
+    <insert id="save" parameterType="com.baidu.base.domain.IPAddress">
+        INSERT INTO sys_ip VALUES (#{id},#{ip},#{count},#{loginTime})
+    </insert>
 </mapper>

@@ -1266,7 +1266,7 @@
     <column id="318" parent="54" name="count">
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="319" parent="54" name="login_time">
+    <column id="319" parent="54" name="loginTime">
       <data-type>datetime|0</data-type>
     </column>
   </database-model>

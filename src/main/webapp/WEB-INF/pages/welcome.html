@@ -23,12 +23,14 @@
 </head>
 <body>
 <div class="page-container">
-	<p class="f-20 text-success">欢迎使用柠檬芒果 <span class="f-14">v10.1</span>后台模版！</p>
+	<p class="f-20 text-success">欢迎使用柠檬芒果 <span class="f-14">小区管理系统</span></p>
 	<p>您当前使用的浏览器为: <span id="s1"> </span></p>
 	<p>版本号为: <span id="s2"> </span></p>
+	<p>本机ip地址: <span id="s4"></span></p>
 	<p>本次登录时间: <span id="s3"> </span></p>
-	<p>登录次数：18 </p>
-	<p>上次登录IP：222.35.131.79.1  上次登录时间：2014-6-14 11:19:55</p>
+	<p>登录次数：<span id="s5"> </span></p>
+	<p>上次登录IP：<span id="s6"> </span></p>
+	<p>上次登录时间：<span id="s7"> </span></p>
 	<table class="table table-border table-bordered table-bg">
 		<thead>
 			<tr>
@@ -199,6 +201,7 @@
 <script type="text/javascript" src="/resources/static/h-ui/js/H-ui.min.js"></script>
 <!--此乃百度统计代码，请自行删除-->
 <script type="text/javascript">
+	// 检测浏览器
 	function getBrowserInfo() {
 		var agent = navigator.userAgent.toLowerCase();
 
@@ -236,42 +239,25 @@
 	var verinfo = (browser + "").replace(/[^0-9.]/ig, "");
 	$("#s2").html(verinfo);
 
-	/**
-	 * @return {string}
-	 */
-	function CurentTime()
-	{
-		var now = new Date();
+	// 获取当前时间
 
-		var year = now.getFullYear();       //年
-		var month = now.getMonth() + 1;     //月
-		var day = now.getDate();            //日
 
-		var hh = now.getHours();            //时
-		var mm = now.getMinutes();          //分
-
-		var clock = year + "-";
-
-		if(month < 10)
-			clock += "0";
-
-		clock += month + "-";
-
-		if(day < 10)
-			clock += "0";
-
-		clock += day + " ";
-
-		if(hh < 10)
-			clock += "0";
-
-		clock += hh + ":";
-		if (mm < 10) clock += '0';
-		clock += mm;
-		return(clock);
+	showmsg();
+	function showmsg() {
+		$.ajax({
+			type:"post",
+			url:"/showIP",
+			data:null,
+			success:function (result) {
+				var a = result.length;
+				$("#s3").html(new Date(parseInt(result[a-1].loginTime)).toLocaleString());
+				$("#s4").html(result[a-1].ip);
+				$("#s5").html(result[a-1].count);
+				$("#s6").html(result[a-2].ip);
+				$("#s7").html(new Date(parseInt(result[a-2].loginTime)).toLocaleString())
+			}
+		})
 	}
-	var time = CurentTime();
-	$("#s3").html(time);
 </script>
 </body>
 </html>

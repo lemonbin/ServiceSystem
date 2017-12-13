@@ -115,7 +115,7 @@
                             .append('<td>'+user.tel+'</td>')
                             .append('<td>'+user.email+'</td>')
                             .append('<td>'+user.role_id+'</td>')
-                            .append('<td>'+user.create_time+'</td>')
+                            .append('<td>'+new Date(parseInt(user.create_time)).toLocaleString()+'</td>')
                             .append('<td class="td-status"><span class="label label-success radius">'+user.state+'</span></td>')
                             .append('<td class="td-manage"><a onclick="admin_start(this,'+user.id+')" style="text-decoration:none"  href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe615;</i></a> ' +
                                     '<a onclick="admin_edit()" title="编辑" href="javascript:;" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> ' +
@@ -207,7 +207,7 @@
 
         // 下一页
         var afterLiFalse = $("<li> <span> <span aria-hidden='true'>&raquo;</span> </span> </li>");
-        var afterLiTrue = $("<li> <a href='#' onclick='pageAllUser(" + result.nextPage + ",3)' aria-label='Next'>下一页<span aria-hidden='true'>&raquo;</span></a> </li>");
+        var afterLiTrue = $("<li> <a href='#' onclick='pageAllUser(" + result.nextPage + ",3)' aria-label='Next'>下一页<span aria-hidden='true'>&raquo;</span></a></li>");
         var afterPage = result.hasNextPage ? afterLiTrue : afterLiFalse;
 
         $("#page").append(afterPage);

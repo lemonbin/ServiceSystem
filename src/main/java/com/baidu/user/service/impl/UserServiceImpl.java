@@ -30,4 +30,9 @@ public class UserServiceImpl implements UserService{
         PageInfo<User> pageInfo = new PageInfo<User>(users);
         return pageInfo;
     }
+
+    @Override
+    public void addUser(User user) {
+        userMapper.addUser(user);
+    }
 }

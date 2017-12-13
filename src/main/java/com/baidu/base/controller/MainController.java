@@ -1,5 +1,6 @@
 package com.baidu.base.controller;
 
+import com.baidu.base.domain.IPAddress;
 import com.baidu.base.utils.GeetestConfig;
 import com.baidu.base.utils.GeetestLib;
 import com.baidu.base.service.MainService;
@@ -29,6 +30,7 @@ import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -111,6 +113,7 @@ public class MainController {
 
     /**
      * 忘记密码修改
+     *
      * @param user User对象
      * @throws MessagingException
      */
@@ -158,6 +161,7 @@ public class MainController {
 
     /**
      * 修改
+     *
      * @param user
      * @return
      */
@@ -169,6 +173,7 @@ public class MainController {
 
     /**
      * 校验用户名
+     *
      * @param username 用户名
      * @return
      */
@@ -186,6 +191,7 @@ public class MainController {
 
     /**
      * 校验邮箱
+     *
      * @param user1
      * @return
      */
@@ -208,6 +214,7 @@ public class MainController {
 
     /**
      * 获取动态验证
+     *
      * @param request
      * @param response
      * @throws IOException
@@ -216,7 +223,6 @@ public class MainController {
     public void register2(HttpServletRequest request, HttpServletResponse response) throws IOException {
         GeetestLib gtSdk = new GeetestLib(GeetestConfig.getGeetest_id(), GeetestConfig.getGeetest_key(),
                 GeetestConfig.isnewfailback());
-
         String resStr = "{}";
 
         //自定义userid
@@ -240,6 +246,13 @@ public class MainController {
 
         PrintWriter out = response.getWriter();
         out.println(resStr);
+    }
+
+    @ResponseBody
+    @RequestMapping("/showIP")
+    public List<IPAddress> showIP() {
+        System.out.println(1);
+        return mainService.findIP();
     }
 
 }

@@ -12,4 +12,6 @@ public interface UserMapper {
     User selectById(Integer id);
 
     List<User> findAll();
+
+    void addUser(User user);
 }
