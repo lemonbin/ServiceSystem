@@ -48,16 +48,16 @@ public class RoleController {
     @ResponseBody
     @RequestMapping("/rolePageAll")
     public PageInfo<Role> pageAll(Role role, @RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize, HttpSession session) {
-        PageInfo<Role> roleGJ = null;
+        PageInfo<Role> pageInfo = null;
 
         if (!role.getName().equals("5")) {
             session.setAttribute("role", role);
-            roleGJ = roleService.GJqueryPage(role, pageNum, pageSize);
+            pageInfo = roleService.fuzzyQueryPage(role, pageNum, pageSize);
         } else {
             Role role1 = (Role) session.getAttribute("role");
-            roleGJ = roleService.GJqueryPage(role1, pageNum, pageSize);
+            pageInfo = roleService.fuzzyQueryPage(role1, pageNum, pageSize);
         }
-        return roleGJ;
+        return pageInfo;
     }
 
     /**

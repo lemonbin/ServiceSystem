@@ -54,7 +54,7 @@ public class RoleServiceImpl implements RoleService{
     }
 
     //高级搜索
-    public PageInfo<Role> GJqueryPage(Role role, Integer pageNum, Integer pageSize) {
+    public PageInfo<Role> fuzzyQueryPage(Role role, Integer pageNum, Integer pageSize) {
         pageNum = pageNum == null ? 1 :pageNum;
         pageSize = pageSize == null ? 3 :pageSize;
         PageHelper.startPage(pageNum,pageSize);

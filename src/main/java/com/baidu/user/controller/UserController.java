@@ -2,6 +2,7 @@ package com.baidu.user.controller;
 
 import com.baidu.base.utils.AjaxResult;
 import com.baidu.user.domain.User;
+import com.baidu.user.domain.ext.ExtUser;
 import com.baidu.user.service.UserService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
@@ -49,16 +50,46 @@ public class UserController {
     }
 
     /**
+     * 分页 + 高级查询
+     */
+    @ResponseBody
+    @RequestMapping("/findPageAll")
+    public PageInfo<User> findPageAll(ExtUser extUser, @RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize, HttpSession session) {
+        PageInfo<User> pageInfo = userService.fuzzyQueryPage(extUser,pageNum, pageSize);
+        return pageInfo;
+    }
+
+    /**
      * 添加用户
      */
     @ResponseBody
     @RequestMapping("/addUser")
-    public void addUser(User user, HttpServletRequest request){
+    public void addUser(User user, HttpServletRequest request) {
         Date now = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         user.setCreate_time(Timestamp.valueOf(dateFormat.format(now)));
         User user1 = (User) request.getServletContext().getAttribute("user");
         user.setCreate_id(user1.getId());
         userService.addUser(user);
+    }
+
+    /**
+     * 删除用户
+     */
+    @ResponseBody
+    @RequestMapping("/deleteUser")
+    public AjaxResult deleteUser(Integer id) {
+        AjaxResult ajaxResult = new AjaxResult();
+        userService.delById(id);
+        return ajaxResult;
+    }
+
+    /**
+     * 批量删除
+     */
+    @ResponseBody
+    @RequestMapping("/deleteUsers")
+    public boolean del(@RequestParam("del") String del) {
+        return userService.datadel(del);
     }
 }
