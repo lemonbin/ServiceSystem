@@ -150,11 +150,11 @@
                 $.each(list, function (index, waste) {
 
                     var state1 = "";
-                    waste.colstatus == 1 ? state1 = "已回收" : state1 = "未回收";
+                    waste.colstatus == 1 ? state1 = "未回收" : state1 = "已回收";
                     var state2 = "";
-                    waste.classstatus == 1 ? state2 = "已分捡" : state2 = "未分捡";
+                    waste.classstatus == 1 ? state2 = "未分捡" : state2 = "已分捡";
                     var state3 = "";
-                    waste.orderstatus == 1 ? state3 = "已出售" : state3 = "未出售";
+                    waste.orderstatus == 1 ? state3 = "未出售" : state3 = "已出售";
                     $("#tbody").append('<tr></tr>').attr("class", "text-c")
                             .append('<td><input type="checkbox" value=' + waste.id + ' name=""></td>')
                             .append('<td>' + waste.id + '</td>')
