@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baidu.waste.mapper.WasteMapper">
+
+<select id="findAll" resultType="com.baidu.waste.domain.Waste">
+    SELECT * FROM waste
+</select>
+
+    <delete id="delById" parameterType="java.lang.Integer">
+        DELETE FROM waste WHERE id = #{id}
+    </delete>
+
+    <insert id="addWaste" parameterType="com.baidu.waste.domain.Waste">
+        INSERT INTO waste (wastetype,collector,coltime,colstatus,classstatus,orderstatus) VALUES (#{wastetype},#{collector},#{coltime},#{colstatus},#{classstatus},#{orderstatus})
+    </insert>
+</mapper>
