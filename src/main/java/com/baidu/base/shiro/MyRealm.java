@@ -50,6 +50,8 @@ public class MyRealm extends AuthorizingRealm {
         //1.认证的结果: 取出User实体类/用户名
         String username = (String) principalCollection.getPrimaryPrincipal();
 
+        System.out.println(username);
+
         //2.从数据库中获取该用户的所有角色和权限
 
         //============>模拟数据<===================
@@ -80,12 +82,10 @@ public class MyRealm extends AuthorizingRealm {
         //获得用户此次输入的用户名
         String username = (String) token.getPrincipal();
         //此处应该拿username去数据库查询, 是否存在该用户
-        //============>下面为模拟代码<===============
         User user = mainMapper.findByUsername(username);
         if (user == null) {
             throw new UnknownAccountException("用户名不存在");
         }
-        //============>模拟结束<===================
         String password = new String((char[]) token.getCredentials());
 
         User user1 = new User(username, password);
