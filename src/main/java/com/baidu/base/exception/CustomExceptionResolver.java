@@ -3,35 +3,25 @@ package com.baidu.base.exception;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
- * Created by dllo on 2017/12/4.
+ * Created by dllo on 17/11/15.
+ * 全局异常处理器
  */
-public class CustomExceptionResolver implements HandlerExceptionResolver{
-    @Override
-    public ModelAndView resolveException(HttpServletRequest request,
-                                         HttpServletResponse response,
-                                         Object handler,
-                                         Exception ex) {
-        //前段控制器DispatcherServlet在进行HandlerMapping
-        //调用handlerAdapter执行handler的过程中, 如果遇到异常会执行此方法
-
-        //handler实际上是最终要执行的方法, 真实身份是handlerMethod
-
-        request.setAttribute("msg",ex.getMessage());
-
-        try {
-            request.getRequestDispatcher("WEB-INF/pages/404.html").forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+public class CustomExceptionResolver implements HandlerExceptionResolver {
+    public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object o, Exception e) {
+        CustomException customException = null;
+        if (e instanceof CustomException) {
+            customException = (CustomException) e;
+        } else {
+            customException = new CustomException("未知错误");
         }
-        
-        return new ModelAndView();
+        String message = customException.getMessage();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("message", message);
+        modelAndView.setViewName("404");
+        return modelAndView;
     }
 }

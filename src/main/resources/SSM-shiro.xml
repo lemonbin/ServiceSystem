@@ -78,4 +78,6 @@
         <!-- 配置用户认证地址 -->
         <property name="loginUrl" value="/loginSubmit"/>
      </bean>
+    <!-- 全局异常捕获, 跳转到错误页面 -->
+    <bean class="com.baidu.base.exception.CustomExceptionResolver"/>
 </beans>
