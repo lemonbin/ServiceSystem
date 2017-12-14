@@ -18,22 +18,22 @@ import java.util.Date;
  * Created by dllo on 17/12/14.
  */
 @Controller
+@RequestMapping("/waste")
 public class WasteController {
 
     @Resource
     private WasteService wasteService;
 
-    @RequestMapping("/article-list")
-    public String article_list() {
-        return "article/article-list";
-    }
 
     @RequestMapping("/article-add")
     public String article_add() {
         return "article/article-add";
     }
 
-
+    @RequestMapping("/article-list")
+    public String article_list() {
+        return "article/article-list";
+    }
     /**
      * 分页+普通查询
      */

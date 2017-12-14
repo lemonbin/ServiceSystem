@@ -18,6 +18,7 @@ import java.util.List;
  * Created by dllo on 17/12/6.
  */
 @Controller
+@RequestMapping("/role")
 public class RoleController {
 
     @Resource
@@ -30,7 +31,10 @@ public class RoleController {
     public String admin_permission_add() {
         return "admin/admin-permission-add";
     }
-
+    @RequestMapping("/admin-permission")
+    public String admin_permission() {
+        return "admin/admin-permission";
+    }
     /**
      * 查询所有
      * @return
@@ -49,7 +53,6 @@ public class RoleController {
     @RequestMapping("/rolePageAll")
     public PageInfo<Role> pageAll(Role role, @RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize, HttpSession session) {
         PageInfo<Role> pageInfo = null;
-
         if (!role.getName().equals("5")) {
             session.setAttribute("role", role);
             pageInfo = roleService.fuzzyQueryPage(role, pageNum, pageSize);
@@ -85,7 +88,7 @@ public class RoleController {
      */
 
     @ResponseBody
-    @RequestMapping("admin/admin-role-save")
+    @RequestMapping("/admin-role-save")
     public AjaxResult admin_role_save(Role role) {
         AjaxResult result = new AjaxResult();
         role.setCreate_time(new Timestamp(System.currentTimeMillis()));
@@ -100,7 +103,7 @@ public class RoleController {
      * 删除
      */
     @ResponseBody
-    @RequestMapping("admin/deleteTheRole")
+    @RequestMapping("/deleteTheRole")
     public boolean deleteTheRole(@RequestParam("id") Integer id) {
         return roleService.deleteTheRole(id);
     }
@@ -110,7 +113,7 @@ public class RoleController {
      * 批量删除
      */
     @ResponseBody
-    @RequestMapping("admin/datadel")
+    @RequestMapping("/datadel")
     public boolean del(@RequestParam("del") String del) {
         return roleService.datadel(del);
     }

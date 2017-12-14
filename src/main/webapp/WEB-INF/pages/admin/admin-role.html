@@ -105,13 +105,13 @@
         }
         $.ajax({
             type: 'POST',
-            url: '/admin_role_dels',
+            url: '/menu/admin_role_dels',
             data: {
                 ids: chk_value
             },
             success: function (msg) {
                 layer.msg(msg, {icon: 1, time: 3000});
-                window.setTimeout('location.href = "/admin-role"', 2000);
+                window.setTimeout('location.href = "/menu/admin-role"', 2000);
             }
         });
 //        alert(chk_value.length==0 ?'你还没有选择任何内容！':chk_value);
@@ -129,13 +129,13 @@
         layer.confirm('角色删除须谨慎，确认要删除吗？', function (index) {
             $.ajax({
                 type: 'POST',
-                url: '/admin_role_del',
+                url: '/menu/admin_role_del',
                 data: {
                     id: id
                 },
                 success: function (msg) {
                     layer.msg(msg, {icon: 1, time: 3000});
-                    window.setTimeout('location.href = "/admin-role"', 2000);
+                    window.setTimeout('location.href = "/menu/admin-role"', 2000);
                 },
                 error: function (msg) {
                     alert(msg);
@@ -148,7 +148,7 @@
     function editMenu() {
 
         var id = $(this).attr("id");
-        admin_role_edit('角色编辑', '/admin-role-edit?id=' + id + '', '800');
+        admin_role_edit('角色编辑', '/menu/admin-role-edit?id=' + id + '', '800');
     }
 
     // 删除
@@ -184,7 +184,7 @@
     function pageAll(pageNum, pageSize) {
         $.ajax({
             type: "post",
-            url: "/pageAll",
+            url: "/menu/pageAll",
             data: {
                 pageNum: pageNum,
                 pageSize: pageSize
@@ -256,7 +256,7 @@
     function fuzzySearch() {
         $.ajax({
             type: "post",
-            url: "/fuzzySearch",
+            url: "/menu/fuzzySearch",
             data: {
                 name: $("#menuName").val(),
                 pageNum: 1,

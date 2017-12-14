@@ -45,10 +45,7 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping("/admin-role-add")
-    public String roleAdd() {
-        return "admin/admin-role-add";
-    }
+
 
 
 
@@ -89,22 +86,6 @@ public class MainController {
             ajaxResult.setMessage("密码错误");
         }
         return ajaxResult;
-    }
-
-
-    @RequestMapping("/admin-role")
-    public String admin_role() {
-        return "admin/admin-role";
-    }
-
-    @RequestMapping("/admin-permission")
-    public String admin_permission() {
-        return "admin/admin-permission";
-    }
-
-    @RequestMapping("/admin-list")
-    public String admin_list() {
-        return "admin/admin-list";
     }
 
     /**

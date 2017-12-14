@@ -82,14 +82,14 @@
         layer.confirm('确认要删除吗？', function (index) {
             $.ajax({
                 type: 'POST',
-                url: '/deleteWaste',
+                url: '/waste/deleteWaste',
                 data: {
                     id: id
                 },
                 success: function (result) {
                     $(obj).parents("tr").remove();
                     layer.msg('已删除!', {icon: 1, time: 1000});
-                    window.setTimeout('location.href="/article-list"', 1500);
+                    window.setTimeout('location.href="/waste/article-list"', 1500);
                 },
                 error: function (data) {
                     console.log(data.msg);
@@ -113,7 +113,7 @@
             if (r) {
                 $.ajax({
                     type: 'post',
-                    url: "/deleteWastes",
+                    url: "/waste/deleteWastes",
                     data: {
                         del: a
                     },
@@ -135,7 +135,7 @@
     pageAll(1, 3);
     function pageAll(pageNum, pageSize) {
         $.ajax({
-            url: "/findWasteAll",
+            url: "/waste/findWasteAll",
             data: {
                 pageNum: pageNum,
                 pageSize: pageSize

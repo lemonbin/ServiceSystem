@@ -46,7 +46,10 @@
 
                 <!-- 必须要有管理员身份才可以进行访问 -->
                 <!-- roles[XX] 代表 有XX角色才可以访问 -->
-                /role/list = roles[admin],authc
+                /role/* = roles[superadmin],authc
+                /menu/* = roles[superadmin],authc
+                /user/* = roles[superadmin],authc
+                /waste/* = roles[wasteadmin],authc
 
                 <!-- user: 表示通过了认证/通过remember me 认证通过可以访问 -->
                 /** = user

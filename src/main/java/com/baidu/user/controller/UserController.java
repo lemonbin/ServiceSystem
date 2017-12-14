@@ -22,6 +22,7 @@ import java.util.List;
  * Created by dllo on 17/12/6.
  */
 @Controller
+@RequestMapping("/user")
 public class UserController {
     //111
     @Resource
@@ -30,6 +31,11 @@ public class UserController {
     @RequestMapping("/admin-add")
     public String admin_add() {
         return "admin/admin-add";
+    }
+    @RequestMapping("/admin-list")
+
+    public String admin_list() {
+        return "admin/admin-list";
     }
 
     @ResponseBody

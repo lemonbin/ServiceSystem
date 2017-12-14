@@ -3,6 +3,7 @@ package com.baidu.base.shiro;
 import com.baidu.base.domain.IPAddress;
 import com.baidu.base.mapper.MainMapper;
 
+import com.baidu.role.domain.Role;
 import com.baidu.user.domain.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -55,10 +56,13 @@ public class MyRealm extends AuthorizingRealm {
         //2.从数据库中获取该用户的所有角色和权限
 
         //============>模拟数据<===================
+        User user = mainMapper.findByUsername(username);
+        List<Role> roles = user.getRoles();
 
         List<String> roleList = new ArrayList<>();
-        roleList.add("CEO");
-        roleList.add("HR");
+        for (Role role : roles) {
+            roleList.add(role.getName());
+        }
 
         List<String> perList = new ArrayList<>();
         perList.add("user:create");

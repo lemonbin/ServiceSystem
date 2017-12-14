@@ -31,7 +31,7 @@
 </head>
 <body>
 <article class="page-container">
-    <form action="/addMenu" method="post" class="form form-horizontal" id="form-admin-role-add">
+    <form action="/menu/addMenu" method="post" class="form form-horizontal" id="form-admin-role-add">
         <input type="hidden" id="menuId" value="0" name="id">
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>名称：</label>
@@ -92,7 +92,7 @@
     $(function () {
         $.ajax({
             type: "post",
-            url: "/showparent",
+            url: "/menu/showparent",
             data: null,
             success: function (list) {
                 for (var i = 0; i < list.length; i++) {
@@ -104,7 +104,7 @@
         if (a != null) {
             $.ajax({
                 type: "post",
-                url: "/editMenu",
+                url: "/menu/editMenu",
                 data: {
                     id: a
                 },

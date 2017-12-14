@@ -22,10 +22,19 @@ import java.util.List;
  * Created by dllo on 2017/12/6.
  */
 @Controller
+@RequestMapping("/menu")
 public class MenuController {
     @Resource
     private MenuService menuService;
 
+    @RequestMapping("/admin-role-add")
+    public String roleAdd() {
+        return "admin/admin-role-add";
+    }
+    @RequestMapping("/admin-role")
+    public String admin_role() {
+        return "admin/admin-role";
+    }
     //分页+查询所有
     @ResponseBody
     @RequestMapping("/pageAll")
