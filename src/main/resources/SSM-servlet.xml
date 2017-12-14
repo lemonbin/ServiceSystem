@@ -13,7 +13,7 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <context:component-scan base-package="com.baidu.base,com.baidu.menu,com.baidu.user,com.baidu.role"/>
+    <context:component-scan base-package="com.baidu.base,com.baidu.menu,com.baidu.user,com.baidu.role,com.baidu.waste"/>
 
     <mvc:default-servlet-handler/>
 
