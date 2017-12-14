@@ -31,7 +31,7 @@ import java.util.Properties;
  */
 @Controller
 public class MainController {
-//666
+
     @Resource
     private MainService mainService;
 
