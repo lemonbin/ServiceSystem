@@ -52,7 +52,7 @@
             </nav>
             <nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
                 <ul class="cl">
-                    <li>超级管理员</li>
+                    <li id="admin"></li>
                     <li class="dropDown dropDown_hover">
                         <a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
                         <ul class="dropDown-menu menu radius box-shadow">
@@ -148,7 +148,7 @@
         </dl>
 
         <dl id="menu-tongji">
-            <dt><i class="Hui-iconfont">&#xe61a;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dt><i class="Hui-iconfont">&#xe61a;</i> 系统统计<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
                     <li><a data-href="charts-1.html" data-title="折线图" href="javascript:void(0)">折线图</a></li>
@@ -279,6 +279,14 @@
 
 <!--此乃百度统计代码，请自行删除-->
 <script>
+    $.ajax({
+        type:'get',
+        url:'/getAdmin',
+        data:null,
+        success:function (result) {
+            $("#admin").html(result.realname)
+        }
+    })
     var _hmt = _hmt || [];
     (function () {
         var hm = document.createElement("script");

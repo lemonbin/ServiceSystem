@@ -51,7 +51,6 @@ public class MyRealm extends AuthorizingRealm {
         //1.认证的结果: 取出User实体类/用户名
         String username = (String) principalCollection.getPrimaryPrincipal();
 
-        System.out.println(username);
 
         //2.从数据库中获取该用户的所有角色和权限
 

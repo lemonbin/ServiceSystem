@@ -143,7 +143,7 @@
     // 二级联动回显
     $.ajax({
         type: 'get',
-        url: '/role/selectAllMenu',
+        url: '/menu/selectAllMenu',
         data: null,
         success: function (result) {
             $("#menu1").html("<option value='-1'>-------请--选--择-------</option>")
@@ -156,7 +156,7 @@
     function selectMenu2(parent_id) {
         $.ajax({
             type: 'get',
-            url: '/role/selectAllMenu',
+            url: '/menu/selectAllMenu',
             data: {parent_id: parent_id},
             success: function (result) {
                 $("#menu2").html("<option value='-1'>-------请--选--择-------</option>")
@@ -172,7 +172,7 @@
     function showResult() {
         $.ajax({
             type: "post",
-            url: "/role/admin/admin-role-save",
+            url: "/role/admin-role-save",
             data: {
                 name: $("#name").val(),
                 status: $("input:radio:checked").val(),

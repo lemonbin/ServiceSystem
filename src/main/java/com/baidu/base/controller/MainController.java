@@ -47,7 +47,11 @@ public class MainController {
 
 
 
-
+    @ResponseBody
+    @RequestMapping("/getAdmin")
+    public User getAdminName(HttpServletRequest request) {
+        return (User) request.getServletContext().getAttribute("user");
+    }
 
 
     /**
